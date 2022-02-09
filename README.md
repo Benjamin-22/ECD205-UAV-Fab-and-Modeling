@@ -13,8 +13,6 @@ basic CPS designs capabilities of AADL: model construction, analysis
 (flow latency, schedulability, fault analysis, code generation, ...)
 
 This project has been defined to work properly with
-[Ocarina](https://github.com/OpenAADL/ocarina),
-[AADL-Inspector](http://www.ellidiss.com/products/aadl-inspector/) and
 [OSATE](http://osate.org)
 
 ## Structure
@@ -42,29 +40,9 @@ The following capabilities of OSATE are demonstrated:
 - flow latency analysis
 - fault analysis, including fault tree analysis
 
-## Use with AADL Inspector
-
-### Import
-
-Load the project file `crazyflie.aic` from the `models` folder
-
-### Available analysis
-
-The following capabilities of AADL Inspector are demonstrated:
-- text editing
-- schedulability analysis using Cheddar
-- model simulation using Marzhin
-
-## Use with Ocarina
-
-Use the provided makefile, type `make help` for details
-
-## Q&A
-
 This model has been tested with
 
 |Tool           | Version |
 |---------------|---------|
 | OSATE         | 2.7.0   |
-| AADLInspector | 1.6     |
-| Ocarina       | 2017.x  |
+
