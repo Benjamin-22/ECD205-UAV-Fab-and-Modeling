@@ -1,8 +1,8 @@
-# Crazyflie AADL Case Study
+# Pixhawk AADL Case Study
 
-AADL models for the Crazyflie UAV, demonstrating various AADL toolchains
+AADL models for the Pixhawk UAV, demonstrating various AADL toolchains
 
-***Note:*** This model is used as part of Georgia Tech OMSCS Class CS7639.
+***Note:*** This model is used as part of Binghamton Senior Project ECD205 UAV Fabrication and Modeling.
 
 ## About
 
