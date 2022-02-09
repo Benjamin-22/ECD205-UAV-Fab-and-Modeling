@@ -1,0 +1,23 @@
+package Pixhawk_Final
+public
+
+  with Pixhawk_System;
+  with Pixhawk_Functional;
+
+  system Pixhawk_Final
+  end Pixhawk_Final;
+
+  system implementation Pixhawk_Final.impl
+  subcomponents
+    Functional : system Pixhawk_Functional::Pixhawk_Functional_Chain.impl;
+    Actual : system Pixhawk_System::Pixhawk_System.impl;
+
+  properties
+    Actual_Function_Binding => (reference (Actual.nRF51822_Firmware)) applies to Functional.Pilot;
+    Actual_Function_Binding => (reference (Actual.STM32F405_Firmware)) applies to Functional.Controller;
+    Actual_Function_Binding => (reference (Actual.STM32F405_Firmware)) applies to Functional.Fusion; 
+    Actual_Function_Binding => (reference (Actual.M1), reference (Actual.M2), reference (Actual.M3), reference (Actual.M4)) applies to Functional.Motors; 
+    Actual_Function_Binding => (reference (Actual.MPU9250)) applies to Functional.Gyro, Functional.Acc, Functional.Magneto;
+  end Pixhawk_Final.impl;
+
+end Pixhawk_Final;
