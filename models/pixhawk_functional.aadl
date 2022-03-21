@@ -5,28 +5,6 @@ package Pixhawk_functional
 
 public
 
-	abstract Video
-		features
-			Video_Out : out data port;
-			
-		flows
-			f1 : flow source Video_Out {latency => 1800 us .. 2200 us; };
-			
-		properties
-			Dispatch_Protocol => Periodic;
-			Period => 17 ms; -- 60 Hz
-	end Video;
-	
-	abstract Telemetry_rec
-		features
-			Telemetry_In : in data port;
-			Telemetry_Out : out data port;
-			
-		flows
-			tx : flow source Telemetry_Out {latency => 100 us .. 300 us;};
-			rx : flow sink Telemetry_In;
-	end Telemetry_rec;
-
   abstract Accelero
   features
     Accelero_Out : out data port;
