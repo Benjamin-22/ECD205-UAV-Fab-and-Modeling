@@ -45,5 +45,3 @@ This model has been tested with
 |Tool           | Version |
 |---------------|---------|
 | OSATE         | 2.7.0   |
-
-Dom was here
