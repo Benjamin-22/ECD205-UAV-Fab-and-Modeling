@@ -12,33 +12,6 @@ public
   with Pixhawk_Errors;
   with EMV2;
   
-  processor STM32F100 extends Processors::ARM::Generic_ARM
-  	features
-  		i2c_bus	: requires bus access Buses::I2C::I2C.IMPL;
-  		spi_bus  : requires bus access Buses::SPI::SPI.IMPL;
-    	uart_bus : requires bus access Buses::UART::UART.IMPL;
-    	pwm_bus  : requires bus access PWM;
-    	
-  	properties
-  		Processor_Properties::Processor_Frequency => 24Mhz; --taken from datasheet at https://www.st.com/resource/en/datasheet/stm32f100rc.pdf
-  		-- TODO: memory components?
-  		
-  		Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);
-  		
-  	-- Do we need an EMV2 annex?	
-  end STM32F100;
-  
-  device Pressure_Sensor
-  	features
-  		pressure_reading : out data port;
-  	flows
-  		f1 : flow source pressure_reading {latency => 100 us .. 300 us; };
-  	properties
-  		Dispatch_Protocol => Periodic;
-  		Period => 4 ms; --need to find more accurate period
-  		
-  end Pressure_Sensor;
-
   ---------------
   -- STM32F405 --
   ---------------
@@ -99,15 +72,15 @@ public
   -- * Radio and BLE communication
   -- * Detect and check installed expansion boards
 
-  processor nRF51822 extends Processors::ARM::Generic_ARM
+  processor STM32F100 extends Processors::ARM::Generic_ARM
   features
     uart_bus : requires bus access Buses::UART::UART.IMPL;
 
   properties
     Scheduling_Protocol => (RMS);
-    Processor_Properties::PRocessor_Frequency => 168hz;
+    Processor_Properties::PRocessor_Frequency => 24Mhz;
     --  XXX memory components ?
-  end nRF51822;
+  end STM32F100;
 
   -------------
   -- MPU9250 --
@@ -125,28 +98,6 @@ public
     Dispatch_Protocol => Periodic;
     Period            => 10 ms;
     
-  annex EMV2
-   {**
-     use types Pixhawk_Errors;
-     use behavior Pixhawk_Errors::simple;
-
-     error propagations
-       DOF6 : out propagation{ValueErroneous};
-     flows
-       f1 : error source DOF6{ValueErroneous} when failed;
-     end propagations; 
- 
-     properties
-       EMV2::hazards => 
-        ([  crossreference => "N/A";
-            failure => "IMU value error";
-            phases => ("in flight");
-            description => "Accelerometer starts to send an erroneous value";
-            comment => "Can be critical if not detected by the health monitoring";
-        ]) applies to DOF6.ValueErroneous;
-                
-      EMV2::OccurrenceDistribution => [ ProbabilityValue => 3.4e-5 ; Distribution => Fixed;] applies to DOF6.ValueErroneous;     
-   **};
   end MPU9250;
 
   ---------------
@@ -167,6 +118,18 @@ public
     Dispatch_Protocol => Sporadic;
 
   end Propeller;
+  
+  device Pressure_Sensor
+  	features
+  		pressure_reading : out data port;
+  	flows
+  		f1 : flow source pressure_reading {latency => 100 us .. 300 us; };
+  	properties
+  		Dispatch_Protocol => Periodic;
+  		Period => 4 ms; --need to find more accurate period
+  		
+  end Pressure_Sensor;
+  
 
   ---------------
   -- Pixhawk --
@@ -178,13 +141,14 @@ public
   system implementation Pixhawk.impl
   subcomponents
     STM32F405 : processor STM32F405;
-    nrf51822 : processor nrf51822;
+    STM32F100 : processor STM32F100;
 
     MPU9250 : device MPU9250;
     M1 : device Propeller;
     M2 : device Propeller;
     M3 : device Propeller;
     M4 : device Propeller;
+    PRES : device Pressure_Sensor;
 
     UART : bus Buses::UART::UART.impl;
     I2C : bus Buses::I2C::I2C.impl;
@@ -192,7 +156,7 @@ public
 
   connections
     C1 : bus access STM32F405.uart_bus -> UART;
-    C2 : bus access nrf51822.uart_bus -> UART;
+    C2 : bus access STM32F100.uart_bus -> UART;
 
     C3 : bus access STM32F405.i2c_bus -> i2c;
     C4 : bus access MPU9250.i2c_bus -> i2c;
