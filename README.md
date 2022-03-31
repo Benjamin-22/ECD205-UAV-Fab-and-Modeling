@@ -1,16 +1,14 @@
 # Pixhawk AADL Case Study
 
-AADL models for the Pixhawk UAV, demonstrating various AADL toolchains
+AADL models for the Pixhawk UAV
 
 ***Note:*** This model is used as part of Binghamton Senior Project ECD205 UAV Fabrication and Modeling.
 
 ## About
 
 This set of models has been built as part of various classes on AADL.
-This model captures the high-level elements of the [Crazyflie
-UAV](https://www.bitcraze.io) by the bitcraze. It aims at illustrating
-basic CPS designs capabilities of AADL: model construction, analysis
-(flow latency, schedulability, fault analysis, code generation, ...)
+This model captures the high-level elements of a UAV built with the PX4 flight controller
+
 
 This project has been defined to work properly with
 [OSATE](http://osate.org)
@@ -38,7 +36,6 @@ The following capabilities of OSATE are demonstrated:
 - text editing
 - graphical model browsing/editing
 - flow latency analysis
-- fault analysis, including fault tree analysis
 
 This model has been tested with
 
