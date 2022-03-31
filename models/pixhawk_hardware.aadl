@@ -9,68 +9,46 @@ public
   with Processors::ARM, Processor_Properties;
 
   with Pixhawk_Types;
-  with Pixhawk_Errors;
-  with EMV2;
   
   ---------------
-  -- STM32F405 --
+  -- STM32F765 --
   ---------------
 
-  -- STM32F405, Cortex-M4@160MHz, that handles the heavy work of
+  -- STM32F765, Cortex-M4@160MHz, that handles the heavy work of
   -- flight control and everything else:
   --
   -- * Sensor reading and motor control
   -- * Flight control
   -- * Telemetry (including the battery voltage)
   -- * Additional user development
+  
+  --Referenced: https://www.st.com/resource/en/datasheet/stm32f765zi.pdf
 
-  processor STM32F405 extends Processors::ARM::Generic_ARM
+  processor STM32F765 extends Processors::ARM::Generic_ARM
   features
     i2c_bus  : requires bus access Buses::I2C::I2C.IMPL;
     spi_bus  : requires bus access Buses::SPI::SPI.IMPL;
     uart_bus : requires bus access Buses::UART::UART.IMPL;
     pwm_bus  : requires bus access PWM;
+    --May need to add CAN bus for GPS
 
   properties
-    Processor_Properties::Processor_Frequency => 168Mhz;
+    Processor_Properties::Processor_Frequency => 216Mhz; --216 MHz maximum frequency for - 40°C to + 85°C ambient temperature range
     --  XXX memory components ?
 
     Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);
     
-   annex EMV2 {**
-     use types Pixhawk_Errors;
-     use behavior Pixhawk_Errors::simple;
-         
-     error propagations
-        bindings : out propagation {Lost, ValueErroneous};
-     flows
-        f2 : error source bindings{ValueErroneous};
-     end propagations;
+  end STM32F765;
 
-     component error behavior
-     transitions
-       t1 : Operational -[binding{ValueErroneous}]-> Failed;
-     propagations
-       Failed -[]-> bindings{ValueErroneous}; -- XXX
-     end component;
-
-  **};
-  end STM32F405;
 
   --------------
-  -- nRF51822 --
+  -- STM32F100 --
   --------------
-
-  -- A NRF51, Cortex-M0, that handles radio communication and power
+-- Referenced: https://www.st.com/resource/en/datasheet/stm32f100rc.pdf
+  -- STM32F100 handles radio communication and power
   -- management:
   --
-  -- * ON/OFF logic
-  -- * Enabling power to the rest of the system (STM32, sensors and
-  --   expansion board)
-  -- * Battery charging management and voltage measurement
-  -- * Master radio bootloader
-  -- * Radio and BLE communication
-  -- * Detect and check installed expansion boards
+  -- * 
 
   processor STM32F100 extends Processors::ARM::Generic_ARM
   features
@@ -78,36 +56,118 @@ public
 
   properties
     Scheduling_Protocol => (RMS);
-    Processor_Properties::PRocessor_Frequency => 24Mhz;
+    Processor_Properties::PRocessor_Frequency => 24Mhz; --taken from datasheet at https://www.st.com/resource/en/datasheet/stm32f100rc.pdf
     --  XXX memory components ?
   end STM32F100;
 
-  -------------
-  -- MPU9250 --
-  -------------
 
-  device MPU9250
-  features
-    DOF6 : out data port Pixhawk_Types::Six_Axis.impl;
-    i2c_bus : requires bus access Buses::I2C::I2C.impl;
 
+  ---- ICM20689 ----
+  --Motion Tracking--
+  -------------------
+  --Referenced: https://s3.amazonaws.com/snapeda/datasheetsICM-20689-v2.2-002.pdf
+  device ICM20689
+  	features
+  	DOF6_Motion_Sensor : out data port Pixhawk_Types::Six_Axis.impl;
+    i2c_bus  : requires bus access Buses::I2C::I2C.IMPL; --Can use I2C or SPI
+    spi_bus : requires bus access Buses::SPI::SPI.impl;
   flows
-    f1 : flow source DOF6 { latency => 200 us .. 500 us; };
+    f1 : flow source DOF6_Motion_Sensor { latency => 100 us .. 100 us; };
 
   properties
     Dispatch_Protocol => Periodic;
-    Period            => 10 ms;
-    
-  end MPU9250;
+    Period            => 125 ns; --is it converting frequency of clock to period?
+
+  end ICM20689;
+
 
   ---------------
-  -- Propeller --
+  -- BMI055 --
+  --Internal Measurement Unit
   ---------------
+  -- Referenced: https://www.mouser.com/datasheet/2/783/BST-BMI055-DS000-08-786482.pdf
+  -- uses spi, i2c and 6DOF
 
-  bus PWM
-  end PWM;
+  device BMI055
+  features
+    DOF6_IMU : out data port Pixhawk_Types::Six_Axis.impl;
+    spi_bus : requires bus access Buses::SPI::SPI.impl;
+    i2c_bus : requires bus access Buses::I2C::I2C.impl;
+  flows
+    f1 : flow source DOF6_IMU { latency => 200 us .. 500 us; };
 
-  device Propeller
+  properties
+    Dispatch_Protocol => Periodic;
+    Period		  => 10 ms;
+
+  end BMI055;
+  
+
+  ---------------
+  -- Telemetry --
+  --------------- 
+  -- Referenced: https://ardupilot.org/copter/docs/common-3dr-radio-v1.html
+  
+  device RC_Telemetry
+  features
+    --Need to come up with a data type for telemetry input
+    --What to output?? 
+    unknown : out data port;
+    uart_bus : requires bus access Buses::UART::UART.IMPL;
+  flows
+    f1 : flow source unknown { latency => 100 us .. 100 us; };
+
+  properties
+    Dispatch_Protocol => Sporadic; --Sporadic? Execute only if event is received on data port?
+
+  end RC_Telemetry;
+
+
+  ---------------
+  -- Pressure Sensor - MS5611 --
+  --------------- 
+  --Referenced: https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+Sheet%7FMS5611-01BA03%7FB3%7Fpdf%7FEnglish%7FENG_DS_MS5611-01BA03_B3.pdf%7FCAT-BLPS0036
+   
+  device MS5611
+  	features
+  		pressure_reading : out data port;
+    	spi_bus : requires bus access Buses::SPI::SPI.impl;
+    	i2c_bus : requires bus access Buses::I2C::I2C.impl;
+  	flows
+  		f1 : flow source pressure_reading {latency => 100 us .. 300 us; };
+  	properties
+  		Dispatch_Protocol => Periodic;
+  		Period => 4 ms; --need to find more accurate period
+  		
+  end MS5611;
+  
+  
+  ---------------
+  --GPS Compass--
+  --IST8310 : Magnetometer
+  ---------------
+  device NEO_M8N
+  	features
+  		gps_reading : out data port;
+  		compass_reading : out data port;
+  		i2c_bus : requires bus access Buses::I2C::I2C.impl;
+  	flows
+  		f1: flow source gps_reading {latency => 100 us .. 300 us; };
+  		f2: flow source compass_reading {latency => 100 us .. 300 us; }; 
+  	properties
+  		Dispatch_Protocol => Periodic;
+  		Period => 4 ms; --need to find more accurate period		
+  end NEO_M8N;
+  
+  
+ device camera
+ 	--Need to figure out
+ end camera;
+  
+---------------
+-- Propeller --
+---------------
+device Propeller
   features
     rate : in data port Pixhawk_Types::PWM_Rate;
     pwm_bus : requires bus access PWM;
@@ -118,18 +178,11 @@ public
     Dispatch_Protocol => Sporadic;
 
   end Propeller;
-  
-  device Pressure_Sensor
-  	features
-  		pressure_reading : out data port;
-  	flows
-  		f1 : flow source pressure_reading {latency => 100 us .. 300 us; };
-  	properties
-  		Dispatch_Protocol => Periodic;
-  		Period => 4 ms; --need to find more accurate period
-  		
-  end Pressure_Sensor;
-  
+
+
+bus PWM
+end PWM;
+
 
   ---------------
   -- Pixhawk --
@@ -140,32 +193,57 @@ public
 
   system implementation Pixhawk.impl
   subcomponents
-    STM32F405 : processor STM32F405;
+    --Processors
+    STM32F765 : processor STM32F765;
     STM32F100 : processor STM32F100;
 
-    MPU9250 : device MPU9250;
+	--Sensing
+    ICM20689 : device ICM20689;
+    BMI055 : device BMI055;
+    MS5611 : device MS5611;
+    NEO_M8N : device NEO_M8N;
+ 
+ 	--Camera
+ 	camera : device camera;
+    
+    --Commands 
+    RC_Telemetry : device RC_Telemetry;  
+        
+    --Motors
     M1 : device Propeller;
     M2 : device Propeller;
     M3 : device Propeller;
     M4 : device Propeller;
-    PRES : device Pressure_Sensor;
-
+    
+	--Busses
     UART : bus Buses::UART::UART.impl;
     I2C : bus Buses::I2C::I2C.impl;
+    SPI : bus Buses::SPI::SPI.impl;
     PWM : bus PWM;
 
   connections
-    C1 : bus access STM32F405.uart_bus -> UART;
-    C2 : bus access STM32F100.uart_bus -> UART;
+    C01 : bus access STM32F765.uart_bus -> UART;
+    C02 : bus access STM32F100.uart_bus -> UART;
+    C03 : bus access RC_Telemetry.uart_bus -> UART;
 
-    C3 : bus access STM32F405.i2c_bus -> i2c;
-    C4 : bus access MPU9250.i2c_bus -> i2c;
-
-    C5 : bus access M1.pwm_bus -> PWM;
-    C6 : bus access M2.pwm_bus -> PWM;
-    C7 : bus access M3.pwm_bus -> PWM;
-    C8 : bus access M4.pwm_bus -> PWM;
-    C9 : bus access STM32F405.pwm_bus -> PWM;
+    C11 : bus access STM32F765.i2c_bus -> i2c;
+    C12 : bus access ICM20689.i2c_bus -> i2c;
+    C13 : bus access BMI055.i2c_bus -> i2c;
+    C14 : bus access MS5611.i2c_bus -> i2c;
+    c15 : bus access NEO_M8N.i2c_bus -> i2c;
+    
+    C21 : bus access STM32F765.spi_bus -> SPI;
+    C22 : bus access ICM20689.spi_bus -> SPI;
+    C23 : bus access BMI055.spi_bus -> SPI;
+    C24 : bus access MS5611.spi_bus -> SPI; 
+    
+    C31 : bus access M1.pwm_bus -> PWM;
+    C32 : bus access M2.pwm_bus -> PWM;
+    C33 : bus access M3.pwm_bus -> PWM;
+    C34 : bus access M4.pwm_bus -> PWM;
+    C35 : bus access STM32F765.pwm_bus -> PWM;
+    --C36 : bus access STM32F100.pwm_bus -> PWM; ??
+    
 
   end Pixhawk.impl;
 
