@@ -11,6 +11,7 @@ public
 
   end nRF51822_Firmware;
 
+
   process STM32F405_Firmware
   features
     Syslink_Packet_Rx : in data port Pixhawk_Types::Syslink_Packet;
@@ -25,36 +26,10 @@ public
   flows
     f1 : flow path Syslink_Packet_Rx -> Rate_1;
     f2 : flow path DOFs              -> Rate_1;
-  annex EMV2 {**
-    use types Pixhawk_Errors;
-    use behavior Pixhawk_Errors::simple;
-
-    error propagations
-      Rate_1 : out propagation{ValueErroneous};
-      DOFs: in propagation{ValueErroneous};
-      Syslink_Packet_RX: in propagation{ValueErroneous};
-      processor : in propagation{Lost, ValueErroneous};
-
-   flows
-     f1 : error path Syslink_Packet_RX -> Rate_1;
-     f2 : error path DOFs{ValueErroneous} -> Rate_1{ValueErroneous};
-     f3 : error path processor{lost, ValueErroneous} -> Rate_1{ValueErroneous};
-    end propagations;
-
-    component error behavior
-     transitions
-       t1 : Operational -[ DOFs{ValueErroneous} or
-       	               --    processor{ValueErroneous} or
-       	                   processor{Lost}
-       ]-> Failed;
-     propagations
-       Failed -[]-> Rate_1{ValueErroneous}; -- XXX
-     end component;
-
-  **};
+  
   end STM32F405_Firmware;
 
-  process implementation STM32F405_Firmware.impl
+  process implementation STM32F405_Firmware.impl --main FMU 
   subcomponents
     CRTP_Tx_Task     : thread CRTP_Tx_Task;
     CRTP_Rx_Task     : thread CRTP_Rx_Task;
