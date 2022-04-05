@@ -112,6 +112,7 @@ public
   features
     --Need to come up with a data type for telemetry input
     --What to output?? 
+    unkown1 : in data port;
     unknown : out data port;
     uart_bus : requires bus access Buses::UART::UART.IMPL;
   flows

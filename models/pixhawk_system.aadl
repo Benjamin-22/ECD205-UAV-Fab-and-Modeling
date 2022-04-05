@@ -3,7 +3,6 @@ public
 
   with Pixhawk_Hardware;
   with Pixhawk_Software;
-  with Cheddar_Transformation_Properties;
 
   system Pixhawk_System extends Pixhawk_Hardware::Pixhawk
   end Pixhawk_System;
@@ -11,57 +10,49 @@ public
   system implementation Pixhawk_System.impl
      extends Pixhawk_Hardware::Pixhawk.impl
   subcomponents
-    nRF51822_Firmware : process Pixhawk_Software::nRF51822_Firmware;
-    STM32F405_Firmware : process Pixhawk_Software::STM32F405_Firmware.impl;
+    STM32F100_Firmware : process Pixhawk_Software::STM32F100_Firmware;
+    STM32F765_Firmware : process Pixhawk_Software::STM32F765_Firmware.impl;
 
   connections
-    C10 : port nRF51822_Firmware.Syslink_Packet_TX
-      -> STM32F405_Firmware.Syslink_Packet_Rx;
-    C10b : port STM32F405_Firmware.Syslink_Packet_TX
-      -> nRF51822_Firmware.Syslink_Packet_Rx;
+    C10 : port STM32F100_Firmware.Serial_Packet_TX -> STM32F765_Firmware.Serial_Packet_Rx;
+    C10b : port STM32F765_Firmware.Serial_Packet_TX -> STM32F100_Firmware.Serial_Packet_Rx;
       
-    C11 : port MPU9250.DOF6 -> STM32F405_Firmware.DOFs;
-    C12 : port STM32F405_Firmware.Rate_1 -> M1.rate;
-    C13 : port STM32F405_Firmware.Rate_2 -> M2.rate;
-    C14 : port STM32F405_Firmware.Rate_3 -> M3.rate;
-    C15 : port STM32F405_Firmware.Rate_4 -> M4.rate;
+    C41 : port ICM20689.DOF6_Motion_Sensor -> STM32F765_Firmware.DOFs_Motion_Sensor;
+    C42 : port BMI055.DOF6_IMU -> STM32F765_Firmware.DOFs_IMU;
+    C43 : port MS5611.pressure_reading -> STM32F765_Firmware.pressure;
+    C44 : port NEO_M8N.gps_reading -> STM32F765_Firmware.gps_reading;
+    C45 : port NEO_M8N.compass_reading -> STM32F765_Firmware.compass_reading;
+    
+    C46 : port STM32F765_Firmware.Rate_1 -> M1.rate;
+    C47 : port STM32F765_Firmware.Rate_2 -> M2.rate;
+    C48 : port STM32F765_Firmware.Rate_3 -> M3.rate;
+    C49 : port STM32F765_Firmware.Rate_4 -> M4.rate;
+    
+    --telemetry input port?
 
   flows
-    -- etef1 represents the functional chain from MPU9250 IMU to STM32
+    -- etef1 represents the functional chain from Motion sensor to STM32
     -- firmware to one of the propeller.
 
-    etef1 : end to end flow MPU9250.f1 -> C11 -> STM32F405_Firmware.f2
-       -> C12 -> M1.f1 { latency => 0 ms .. 2 ms;};
+    etef1 : end to end flow ICM20689.f1 -> C41 -> STM32F765_Firmware.f3
+       -> C46 -> M1.f1 { latency => 0 ms .. 2 ms;};
 
     -- etef2 represents the functional chain from command
-    -- (received from nRF51822) to STM32 firmware to one of the
+    -- (received from STM32F100) to STM32F765 firmware to one of the
     -- propeller.
 
-    etef2 : end to end flow nRF51822_Firmware.f1 -> C10 -> STM32F405_Firmware.f1
-      -> C12 -> M1.f1 { latency => 0 ms .. 2 ms;};
+    etef2 : end to end flow STM32F100_Firmware.f1 -> C10 -> STM32F765_Firmware.f1
+      -> C46 -> M1.f1 { latency => 0 ms .. 2 ms;};
 
   properties
-    Actual_Processor_Binding => (reference (STM32F405)) applies to STM32F405_Firmware;
-    Actual_Processor_Binding => (reference (nRF51822)) applies to nRF51822_Firmware;
+    Actual_Processor_Binding => (reference (STM32F765)) applies to STM32F765_Firmware;
+    Actual_Processor_Binding => (reference (STM32F100)) applies to STM32F100_Firmware;
 
     Actual_Connection_Binding => (reference (UART)) applies to C10;
-    Actual_Connection_Binding => (reference (I2C)) applies to C11;
-    
-    Cheddar_Transformation_Properties::Exported_Attribute_Time_Units => MicroSecond;
-    Cheddar_Transformation_Properties::Transform_Sporadic_To_Periodic => true;
-  annex EMV2 {**
-    use types Pixhawk_Errors;
-    use behavior Pixhawk_Errors::simple;
-    composite error behavior
-    states
-      [ MPU9250.Operational and STM32F405.Operational]-> Operational;   
-      [ MPU9250.Failed or STM32F405.Failed]-> Failed;       
-    end composite;  
-        
-    connection error
-       C10_err : error source C10{ValueErroneous}; 
-    end connection;
-  **};
+    Actual_Connection_Binding => (reference (I2C)) applies to C41;
+    Actual_Connection_Binding => (reference (I2C)) applies to C42;
+    --Finish adding protocol bindings
+      
   end Pixhawk_System.impl;
 
 end Pixhawk_System;

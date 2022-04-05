@@ -2,21 +2,27 @@ package Pixhawk_Software
 public
   with Pixhawk_Types;
 
-  process nRF51822_Firmware
+  process STM32F100_Firmware
   features
-    Syslink_Packet_TX: out data port Pixhawk_Types::Syslink_Packet;
-    Syslink_Packet_RX: in data port Pixhawk_Types::Syslink_Packet;
+    Serial_Packet_TX: out data port Pixhawk_Types::Serial_Packet;
+    Serial_Packet_RX: in data port Pixhawk_Types::Serial_Packet;
+    --Possibly add input port from telemetry
   flows
-    f1 : flow source syslink_Packet_TX{ latency => 1 ms .. 2 ms; };
+    f1 : flow source Serial_Packet_TX{ latency => 1 ms .. 2 ms; };
 
-  end nRF51822_Firmware;
+  end STM32F100_Firmware;
 
 
-  process STM32F405_Firmware
+  process STM32F765_Firmware
   features
-    Syslink_Packet_Rx : in data port Pixhawk_Types::Syslink_Packet;
-    Syslink_Packet_Tx : out data port Pixhawk_Types::Syslink_Packet;
-    DOFs           : in data port Pixhawk_Types::Six_Axis.impl;
+    Serial_Packet_Rx : in data port Pixhawk_Types::Serial_Packet;
+    Serial_Packet_Tx : out data port Pixhawk_Types::Serial_Packet;
+    DOFs_Motion_Sensor : in data port Pixhawk_Types::Six_Axis.impl;
+    DOFs_IMU : in data port Pixhawk_Types::Six_Axis.impl;
+    pressure : in data port;
+    gps_reading : in data port;
+    compass_reading : in data port;
+    --Add other sensors here
 
     Rate_1         : out data port Pixhawk_Types::PWM_Rate;
     Rate_2         : out data port Pixhawk_Types::PWM_Rate;
@@ -24,61 +30,69 @@ public
     Rate_4         : out data port Pixhawk_Types::PWM_Rate;
 
   flows
-    f1 : flow path Syslink_Packet_Rx -> Rate_1;
-    f2 : flow path DOFs              -> Rate_1;
+    f1 : flow path Serial_Packet_Rx -> Rate_1;
+    f2 : flow path DOFs_IMU         -> Rate_1; --Choose one DOF or both?
+    f3 : flow path DOFs_Motion_Sensor-> Rate_1 { latency => 100 us .. 101 us; }; 
   
-  end STM32F405_Firmware;
+  end STM32F765_Firmware;
 
-  process implementation STM32F405_Firmware.impl --main FMU 
+  process implementation STM32F765_Firmware.impl --main FMU 
   subcomponents
-    CRTP_Tx_Task     : thread CRTP_Tx_Task;
-    CRTP_Rx_Task     : thread CRTP_Rx_Task;
+    MAVLink_Tx_Task     : thread MAVLink_Tx_Task;
+    MAVLink_Rx_Task     : thread MAVLink_Rx_Task;
     Power_Management : thread Power_Management;
     Main_Loop        : thread Main_Loop;
 
   connections
-    C1 : port CRTP_Tx_Task.Msg -> Syslink_Packet_Tx;
-    C8 : port Main_Loop.Syslink_Packet_Tx -> CRTP_Tx_Task.SysLink_Packet;
+    C1 : port MAVLink_Tx_Task.Msg -> Serial_Packet_Tx;
+    C8 : port Main_Loop.Serial_Packet_Tx -> MAVLink_Tx_Task.Serial_Packet;
 
-    C2 : port Syslink_Packet_Rx -> CRTP_Rx_Task.Msg;
-    C7 : port CRTP_Rx_Task.SysLink_Packet -> Main_Loop.Syslink_Packet_Rx;
+    C2 : port Serial_Packet_Rx -> MAVLink_Rx_Task.Msg;
+    C7 : port MAVLink_Rx_Task.Serial_Packet -> Main_Loop.Serial_Packet_Rx;
 
     C3 : port Main_Loop.Rate_1 -> Rate_1;
     C4 : port Main_Loop.Rate_2 -> Rate_2;
     C5 : port Main_Loop.Rate_3 -> Rate_3;
     C6 : port Main_Loop.Rate_4 -> Rate_4;
 
-    C9 : port DOFs -> Main_Loop.DOFs;
-
+    C9 : port DOFs_Motion_Sensor -> Main_Loop.DOFs_motion;
+    C10 : port DOFs_IMU -> Main_Loop.DOFs_imu;
+    c11 : port pressure -> Main_Loop.pressure;
+    c12 : port gps_reading -> Main_Loop.gps_reading;
+    c13 : port compass_reading -> Main_Loop.compass_reading;
+    
   flows
-    f1 : flow path Syslink_Packet_Rx -> C2 -> CRTP_Rx_Task.fs1 -> C7
+    f1 : flow path Serial_Packet_Rx -> C2 -> MAVLink_Rx_Task.fs1 -> C7
       -> Main_Loop.fs1 -> C3 -> Rate_1;
-    f2 : flow path DOFs -> C9 -> Main_Loop.fs2 -> C3 -> Rate_1;
-  end STM32F405_Firmware.impl;
+    --f2 : flow path DOFs -> C9 -> Main_Loop.fs2 -> C3 -> Rate_1; --Which DOFs should this be??
+  end STM32F765_Firmware.impl;
 
-  thread CRTP_Tx_Task
+
+
+  thread MAVLink_Tx_Task
   features
-    Msg : out data port Pixhawk_Types::Syslink_Packet;
-    Syslink_Packet : in data port Pixhawk_Types::Syslink_Packet;
+    Msg : out data port Pixhawk_Types::Serial_Packet;
+    Serial_Packet : in data port Pixhawk_Types::Serial_Packet;
   properties
     Priority => 2;
     Dispatch_Protocol => Sporadic;
     Period => 1000 us;
-    Compute_Execution_Time => 10 us .. 50 us;
-  end CRTP_Tx_Task;
+    Compute_Execution_Time => 10 us .. 50 us; --https://arxiv.org/pdf/1906.10641.pdf is it computational overhead? 26 us per packet
+  end MAVLink_Tx_Task;
 
-  thread CRTP_Rx_Task
+  thread MAVLink_Rx_Task
   features
-    Msg : in data port Pixhawk_Types::Syslink_Packet;
-    Syslink_Packet : out data port Pixhawk_Types::Syslink_Packet;
+    Msg : in data port Pixhawk_Types::Serial_Packet;
+    Serial_Packet : out data port Pixhawk_Types::Serial_Packet;
   flows
-    fs1 : flow path Msg -> Syslink_Packet;
+    fs1 : flow path Msg -> Serial_Packet;
   properties
     Priority => 2;
     Dispatch_Protocol => Sporadic;
     Period => 1000 us;
     Compute_Execution_Time => 10 us .. 50 us;
-  end CRTP_Rx_Task;
+  end MAVLink_Rx_Task;
+
 
   thread Power_Management
   properties
@@ -88,12 +102,17 @@ public
     Compute_Execution_Time => 10 us .. 20 us;
   end Power_Management;
 
+
   thread Main_Loop
   features
-    DOFs              : in data port Pixhawk_Types::Six_Axis.impl;
+    DOFs_motion              : in data port Pixhawk_Types::Six_Axis.impl;
+    DOFs_imu                 : in data port Pixhawk_Types::Six_Axis.impl;
+    pressure                 : in data port;
+    gps_reading				 : in data port;
+    compass_reading			 : in data port;
 
-    Syslink_Packet_Rx : in data port Pixhawk_Types::Syslink_Packet;
-    Syslink_Packet_Tx : out data port Pixhawk_Types::Syslink_Packet;
+    Serial_Packet_Rx : in data port Pixhawk_Types::Serial_Packet;
+    Serial_Packet_Tx : out data port Pixhawk_Types::Serial_Packet;
 
     Rate_1            : out data port Pixhawk_Types::PWM_Rate;
     Rate_2            : out data port Pixhawk_Types::PWM_Rate;
@@ -101,8 +120,8 @@ public
     Rate_4            : out data port Pixhawk_Types::PWM_Rate;
 
   flows
-    fs1 : flow path Syslink_Packet_Rx -> Rate_1;
-    fs2 : flow path DOFs              -> Rate_1;
+    fs1 : flow path Serial_Packet_Rx -> Rate_1;
+    --fs2 : flow path DOFs              -> Rate_1; --again which DOFs should this be??
 
   properties
     Priority => 3;
