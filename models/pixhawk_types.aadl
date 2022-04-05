@@ -40,8 +40,8 @@ public
   -- Pixhawk 2.0. It handles low level communication on the serial
   -- port. See https://wiki.bitcraze.io/doc:Pixhawk:syslink:index
 
-  data Syslink_Packet
+  data Serial_Packet
     --  For now, we model it as an opaque type
-  end Syslink_Packet;
+  end Serial_Packet;
 
 end Pixhawk_Types;
