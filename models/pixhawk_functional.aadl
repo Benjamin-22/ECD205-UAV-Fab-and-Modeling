@@ -1,7 +1,6 @@
 package Pixhawk_functional
 
--- This package models the abstract functional chain of the Pixhawk,
--- from https://wiki.bitcraze.io/doc:Pixhawk:dev:fimware:sensor_to_control
+-- This package models the abstract functional chain of the Pixhawk Drone
 
 public
 
@@ -83,7 +82,6 @@ public
     f2 : flow path Gyro_In -> Data_F_Out {latency => 200 us .. 400 us; };
     f3 : flow path Magneto_In -> Data_F_Out {latency => 200 us .. 400 us; };
     f4 : flow path Pressure_In -> Data_F_Out {latency => 200 us .. 400 us; };  
-    --Video?
     
   properties
     Dispatch_Protocol => Periodic;
@@ -95,17 +93,14 @@ public
   features
     Data_F_In : in data port;
     Gyro_In   : in data port;
+    order : in data port;
     
     Motor_Out : out data port;
-    
-    Video_In : in data port;
-    TC : in data port;
+        
   flows
   	f1 : flow path Data_F_In -> Motor_Out {latency => 200 us .. 400 us; };	
     f2 : flow path Gyro_In -> Motor_Out {latency => 200 us .. 400 us; };
-    f3 : flow sink Video_In {latency => 100 us .. 500 us; };
-    f4 : flow sink TC {latency => 100 us .. 500 us; };
-    --Should TC be here as a flow sink or flow path??	
+    f3 : flow sink order {latency => 200 us .. 400 us; };
     
   properties
     Dispatch_Protocol => Periodic;
@@ -113,6 +108,33 @@ public
   end Controller;
 
 
+  abstract Pilot
+  features
+	Order : out data port;
+	
+	flows
+    f1 : flow source Order {latency => 100 us .. 300 us; };
+
+  properties
+	Dispatch_Protocol => Sporadic;
+	Period => 17 ms; 
+	
+  end Pilot;
+
+
+  abstract Telemetry_rec
+  features
+	order_In : in data port;
+	order_Out : out data port;
+
+  flows
+	order_rec : flow path order_In -> order_Out {latency => 100 us .. 300 us;};
+
+  properties
+	Dispatch_Protocol => Sporadic;
+  end Telemetry_rec;
+
+  
   abstract Motors
   features
     Motor_In : in data port;
@@ -126,35 +148,6 @@ public
     Period => 2ms;
   end Motors;
 
-
-  abstract Pilot
-  features
-	Order : out data port;
-	
-	-- Is below here correct
-	flows
-    f1 : flow source Order {latency => 1800 us .. 2200 us; };
-
-  properties
-	Dispatch_Protocol => Sporadic;
-	Period => 17 ms; 
-	
-  end Pilot;
-
-
-  abstract Telemetry_rec
-  features
-	Telemetry_In : in data port;
-	Telemetry_Out : out data port;
-
-  flows
-	--tx : flow source Telemetry_Out ;
-	rx : flow path Telemetry_In -> Telemetry_Out {latency => 100 us .. 300 us;}; -- Should this be a flow sink or flow path like in Sensor_Fusion?
-
-  properties
-	Dispatch_Protocol => Sporadic;
-  end Telemetry_rec;
-
   
   system Pixhawk_Functional_Chain
   end Pixhawk_Functional_Chain;
@@ -166,42 +159,42 @@ public
     Gyro       : abstract Gyro;
     Magneto    : abstract Magneto;
     Pressure   : abstract Pressure;
-
 	Video 	   : abstract Video;
 	
-    Pilot      : abstract Pilot;
-    Telemetry_rec : abstract Telemetry_rec;
-
     --  Computing
     Fusion     : abstract Sensor_Fusion;
     Controller : abstract Controller;
+    
+    --  Commands/communication
+    Pilot      : abstract Pilot;
+    Telemetry_rec : abstract Telemetry_rec;
     
     --  Acting
     Motors : abstract Motors;
 
   connections
-    C1 : port Acc.Accelero_Out     -> Fusion.Accelero_In;
-    C2 : port Gyro.Gyro_Out        -> Fusion.Gyro_In;
-    C3 : port Magneto.Magneto_Out  -> Fusion.Magneto_In;
-    C4 : port Pressure.Pressure_Out  -> Fusion.Pressure_In;
+    FC1 : port Acc.Accelero_Out     -> Fusion.Accelero_In;
+    FC2 : port Gyro.Gyro_Out        -> Fusion.Gyro_In;
+    FC3 : port Magneto.Magneto_Out  -> Fusion.Magneto_In;
+    FC4 : port Pressure.Pressure_Out  -> Fusion.Pressure_In;
 
-    C5 : port Gyro.Gyro_Out        -> Controller.Gyro_In;
-    C6 : port Fusion.Data_F_Out    -> Controller.Data_F_In;
+    FC5 : port Gyro.Gyro_Out        -> Controller.Gyro_In;
+    FC6 : port Fusion.Data_F_Out    -> Controller.Data_F_In;
 
-    C7 : port Controller.Motor_Out -> Motors.Motor_In;
+    FC7 : port Controller.Motor_Out -> Motors.Motor_In;
 
-    C8 : port Pilot.Order -> Telemetry_rec.Telemetry_In;
-    C9 : port Telemetry_rec.Telemetry_Out -> Controller.TC;
-    c10 : port Video.Video_out -> Controller.Video_In;
+    FC8 : port Pilot.Order -> Telemetry_rec.Order_In;
+    FC9 : port Telemetry_rec.Order_Out -> Controller.order;
     
-
-  flows
-  	f_etef1 : end to end flow Gyro.f1 -> C2 -> Fusion.f2 -> C6 -> Controller.f1 -> C7 -> Motors.f1 { latency => 0 ms .. 10 ms;};
-  	f_etef1bis : end to end flow Gyro.f1 -> C5 -> Controller.f2 -> C7 -> Motors.f1 { latency => 0 ms .. 10 ms;};
-    f_etef2 : end to end flow Acc.f1 -> C1 -> Fusion.f1 -> C6 -> Controller.f1 -> C7 -> Motors.f1 { latency => 0 ms .. 10 ms;};
+  	flows
+  	-- Gyro reading sent to controller (fusion then to controller for slow reading), and motors are adjusted accordingly
+  	-- All sensors in functional model have same latency so gyro is included as example
+  	f_slow_gyro : end to end flow Gyro.f1 -> FC2 -> Fusion.f2 -> FC6 -> Controller.f1 -> FC7 -> Motors.f1 { latency => 0 ms .. 9 ms;};
+  	f_fast_gyro : end to end flow Gyro.f1 -> FC5 -> Controller.f2 -> FC7 -> Motors.f1 { latency => 0 ms .. 5 ms;};
     
-    f_etef3 : end to end flow Video.f1 -> c10 -> Controller.f3 { latency => 0 ms .. 10 ms;};
-    f_etef4 : end to end flow Pilot.f1 -> c8 -> Telemetry_rec.rx -> c9 -> Controller.f4 { latency => 0 ms .. 10 ms;};
+    --Pilot gives order, received by telemetry, sends to flight controller
+    f_command : end to end flow Pilot.f1 -> FC8 -> Telemetry_rec.order_rec -> FC9 -> Controller.f3 { latency => 0 ms .. 4 ms;};
+    
   end Pixhawk_Functional_Chain.impl;
 
 end Pixhawk_functional;
