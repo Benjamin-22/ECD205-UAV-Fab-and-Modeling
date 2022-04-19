@@ -1,8 +1,6 @@
 package Pixhawk_Hardware
 
--- This package models the hardware architecture of the Pixhawk
--- See https://wiki.bitcraze.io/projects:Pixhawk2:architecture:index
--- for details
+-- This package models the hardware architecture of the Pixhawk drone
 
 public
   with Buses::I2C, Buses::SPI, Buses::UART;
@@ -13,13 +11,11 @@ public
   ---------------
   -- STM32F765 --
   ---------------
-
-  -- STM32F765, Cortex-M4@160MHz, that handles the heavy work of
+  -- Cortex-M7@160MHz, that handles the heavy work of
   -- flight control and everything else:
-  --
   -- * Sensor reading and motor control
   -- * Flight control
-  -- * Telemetry (including the battery voltage)
+  -- * Power
   -- * Additional user development
   
   --Referenced: https://www.st.com/resource/en/datasheet/stm32f765zi.pdf
@@ -29,37 +25,32 @@ public
     i2c_bus  : requires bus access Buses::I2C::I2C.IMPL;
     spi_bus  : requires bus access Buses::SPI::SPI.IMPL;
     uart_bus : requires bus access Buses::UART::UART.IMPL;
+    can_bus  : requires bus access CAN;
     pwm_bus  : requires bus access PWM;
-    --May need to add CAN bus for GPS
-
+    
   properties
-    Processor_Properties::Processor_Frequency => 216Mhz; --216 MHz maximum frequency for - 40°C to + 85°C ambient temperature range
-    --  XXX memory components ?
-
+    Processor_Properties::Processor_Frequency => 216Mhz; --for - 40°C to + 85°C ambient temperature range
+ 
     Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);
     
   end STM32F765;
 
 
-  --------------
+  ---------------
   -- STM32F100 --
-  --------------
--- Referenced: https://www.st.com/resource/en/datasheet/stm32f100rc.pdf
-  -- STM32F100 handles radio communication and power
-  -- management:
-  --
-  -- * 
-
+  ---------------
+  --STM32F100, Cortex-M3@24MHz, handles radio communication and power
+  -- Referenced: https://www.st.com/resource/en/datasheet/stm32f100rc.pdf
+  
   processor STM32F100 extends Processors::ARM::Generic_ARM
   features
     uart_bus : requires bus access Buses::UART::UART.IMPL;
 
   properties
     Scheduling_Protocol => (RMS);
-    Processor_Properties::PRocessor_Frequency => 24Mhz; --taken from datasheet at https://www.st.com/resource/en/datasheet/stm32f100rc.pdf
-    --  XXX memory components ?
+    Processor_Properties::PRocessor_Frequency => 24Mhz;
+   
   end STM32F100;
-
 
 
   ---- ICM20689 ----
@@ -69,14 +60,14 @@ public
   device ICM20689
   	features
   	DOF6_Motion_Sensor : out data port Pixhawk_Types::Six_Axis.impl;
-    i2c_bus  : requires bus access Buses::I2C::I2C.IMPL; --Can use I2C or SPI
-    spi_bus : requires bus access Buses::SPI::SPI.impl;
+    i2c_bus  : requires bus access Buses::I2C::I2C.IMPL;
+    spi_bus  : requires bus access Buses::SPI::SPI.impl;
   flows
-    f1 : flow source DOF6_Motion_Sensor { latency => 100 us .. 100 us; };
+    f1 : flow source DOF6_Motion_Sensor { latency => 200 us .. 500 us; };
 
   properties
     Dispatch_Protocol => Periodic;
-    Period            => 125 ns; --is it converting frequency of clock to period?
+    Period            => 125 ns; --I2C
 
   end ICM20689;
 
@@ -111,15 +102,15 @@ public
   device RC_Telemetry
   features
     --Need to come up with a data type for telemetry input
-    --What to output?? 
-    unkown1 : in data port;
-    unknown : out data port;
-    uart_bus : requires bus access Buses::UART::UART.IMPL;
+    command     : in data port;
+    instruction : out data port Pixhawk_Types::Serial_Packet;
+    uart_bus    : requires bus access Buses::UART::UART.IMPL;
   flows
-    f1 : flow source unknown { latency => 100 us .. 100 us; };
+    f1 : flow source instruction { latency => 100 us .. 400 us; };
 
   properties
-    Dispatch_Protocol => Sporadic; --Sporadic? Execute only if event is received on data port?
+    Dispatch_Protocol => Periodic;
+    Period 			=> 3 ms;
 
   end RC_Telemetry;
 
@@ -140,49 +131,94 @@ public
   		Dispatch_Protocol => Periodic;
   		Period => 4 ms; --need to find more accurate period
   		
+  		
   end MS5611;
   
   
   ---------------
   --GPS Compass--
-  --IST8310 : Magnetometer
+  --https://www.u-blox.com/en/product/neo-m8-series
   ---------------
   device NEO_M8N
   	features
-  		gps_reading : out data port;
+  		gps_reading 	: out data port;
   		compass_reading : out data port;
+  		can_bus : requires bus access CAN;
   		i2c_bus : requires bus access Buses::I2C::I2C.impl;
   	flows
-  		f1: flow source gps_reading {latency => 100 us .. 300 us; };
-  		f2: flow source compass_reading {latency => 100 us .. 300 us; }; 
+  		f1 : flow source gps_reading {latency => 100 us .. 300 us; };
+  		f2 : flow source compass_reading {latency => 100 us .. 300 us; }; 
   	properties
   		Dispatch_Protocol => Periodic;
   		Period => 4 ms; --need to find more accurate period		
   end NEO_M8N;
   
   
- device camera
- 	--Need to figure out
- end camera;
+  bus wifi_connection
+  end wifi_connection;
+  
+  -----------
+  ---Yi Action Camera
+  -- Referenced: https://www.xiaoyi.com/en/specs_en.html
+  -----------
+ device Yi_action_camera
+ 	features
+			camera_on_off: in event port;
+			video_stream : out data port;
+			wifi_access  : requires bus access wifi_connection;
+ 	flows
+ 		f1 : flow source video_stream { latency => 40 ms .. 60 ms; }; -- insert link from video
+ end Yi_action_camera;
+  
+  
+-- Ground Station
+-- Represents a laptop, or windows device to receive video stream from camera
+device ground_station
+	features
+		camera_on_off: out event port;
+		video_stream : in data port;
+		wifi_access  : requires bus access wifi_connection;
+end ground_station;
+  
   
 ---------------
--- Propeller --
+--Electronic Speed Controller--
+--Referenced: http://dl.djicdn.com/downloads/e305/en/E305_User_Manual_v1.00_en.pdf
 ---------------
-device Propeller
+device DJI_420_Lite
+	features  
+		rate 		  : in data port Pixhawk_Types::PWM_Rate;
+		adjusted_rate : out data port Pixhawk_Types::PWM_Rate;
+    	pwm_bus 	  : requires bus access PWM;
+    flows
+    	f1 : flow path rate -> adjusted_rate { latency => 10 ns .. 20 ns; }; -- measured
+    properties
+    	Dispatch_Protocol => Sporadic;	
+    		
+end DJI_420_Lite;
+  
+---------------
+-- Motors/Propeller --
+--Referenced: http://dl.djicdn.com/downloads/e305/en/E305_User_Manual_v1.00_en.pdf
+---------------
+device DJI_2312E
   features
-    rate : in data port Pixhawk_Types::PWM_Rate;
+    rate 	: in data port Pixhawk_Types::PWM_Rate;
     pwm_bus : requires bus access PWM;
   flows
-    f1 : flow sink rate { latency => 100 us .. 100 us; };
+    f1 : flow sink rate { latency => 1 ns .. 2 ns; };
 
   properties
     Dispatch_Protocol => Sporadic;
 
-  end Propeller;
+  end DJI_2312E;
 
 
 bus PWM
 end PWM;
+
+bus CAN
+end CAN;
 
 
   ---------------
@@ -205,46 +241,69 @@ end PWM;
     NEO_M8N : device NEO_M8N;
  
  	--Camera
- 	camera : device camera;
+ 	camera : device Yi_action_camera;
+ 	
+ 	--ground station
+ 	ground_station: device ground_station;
     
     --Commands 
     RC_Telemetry : device RC_Telemetry;  
         
-    --Motors
-    M1 : device Propeller;
-    M2 : device Propeller;
-    M3 : device Propeller;
-    M4 : device Propeller;
+    --Motors, ESCs
+    ESC_1 : device DJI_420_Lite;
+    ESC_2 : device DJI_420_Lite;
+    ESC_3 : device DJI_420_Lite;
+    ESC_4 : device DJI_420_Lite;
+    M1 : device DJI_2312E;
+    M2 : device DJI_2312E;
+    M3 : device DJI_2312E;
+    M4 : device DJI_2312E;
     
 	--Busses
     UART : bus Buses::UART::UART.impl;
-    I2C : bus Buses::I2C::I2C.impl;
-    SPI : bus Buses::SPI::SPI.impl;
-    PWM : bus PWM;
+    I2C  : bus Buses::I2C::I2C.impl;
+    SPI  : bus Buses::SPI::SPI.impl;
+    PWM  : bus PWM;
+    CAN  : bus CAN;
+    wifi : bus wifi_connection;
 
   connections
-    C01 : bus access STM32F765.uart_bus -> UART;
-    C02 : bus access STM32F100.uart_bus -> UART;
-    C03 : bus access RC_Telemetry.uart_bus -> UART;
+    HC01 : bus access STM32F765.uart_bus    -> UART;
+    HC02 : bus access STM32F100.uart_bus    -> UART;
+    HC03 : bus access RC_Telemetry.uart_bus -> UART;
 
-    C11 : bus access STM32F765.i2c_bus -> i2c;
-    C12 : bus access ICM20689.i2c_bus -> i2c;
-    C13 : bus access BMI055.i2c_bus -> i2c;
-    C14 : bus access MS5611.i2c_bus -> i2c;
-    c15 : bus access NEO_M8N.i2c_bus -> i2c;
+    HC11 : bus access STM32F765.i2c_bus -> i2c;
+    HC12 : bus access ICM20689.i2c_bus  -> i2c;
+    HC13 : bus access BMI055.i2c_bus    -> i2c;
+    HC14 : bus access MS5611.i2c_bus    -> i2c;
+    HC15 : bus access NEO_M8N.i2c_bus   -> i2c;
     
-    C21 : bus access STM32F765.spi_bus -> SPI;
-    C22 : bus access ICM20689.spi_bus -> SPI;
-    C23 : bus access BMI055.spi_bus -> SPI;
-    C24 : bus access MS5611.spi_bus -> SPI; 
+    HC16 : bus access NEO_M8N.can_bus   -> CAN;
     
-    C31 : bus access M1.pwm_bus -> PWM;
-    C32 : bus access M2.pwm_bus -> PWM;
-    C33 : bus access M3.pwm_bus -> PWM;
-    C34 : bus access M4.pwm_bus -> PWM;
-    C35 : bus access STM32F765.pwm_bus -> PWM;
-    --C36 : bus access STM32F100.pwm_bus -> PWM; ??
+    HC21 : bus access STM32F765.spi_bus -> SPI;
+    HC22 : bus access ICM20689.spi_bus  -> SPI;
+    HC23 : bus access BMI055.spi_bus    -> SPI;
+    HC24 : bus access MS5611.spi_bus    -> SPI; 
     
+    HC31 : bus access M1.pwm_bus -> PWM;
+    HC32 : bus access M2.pwm_bus -> PWM;
+    HC33 : bus access M3.pwm_bus -> PWM;
+    HC34 : bus access M4.pwm_bus -> PWM;
+    HC35 : bus access STM32F765.pwm_bus -> PWM;
+    HC36 : bus access ESC_1.pwm_bus -> PWM;
+    HC37 : bus access ESC_2.pwm_bus -> PWM;
+    HC38 : bus access ESC_3.pwm_bus -> PWM;
+    HC39 : bus access ESC_4.pwm_bus -> PWM;
+    
+    HC40 : port ESC_1.adjusted_rate -> M1.rate; 
+    HC41 : port ESC_2.adjusted_rate -> M2.rate;
+    HC42 : port ESC_3.adjusted_rate -> M3.rate;
+    HC43 : port ESC_4.adjusted_rate -> M4.rate;
+    
+    HC60 : bus access camera.wifi_access -> wifi;
+    HC61 : bus access ground_station.wifi_access -> wifi;
+    HC62 : port ground_station.camera_on_off -> camera.camera_on_off;
+    HC63 : port camera.video_stream -> ground_station.video_stream;
 
   end Pixhawk.impl;
 

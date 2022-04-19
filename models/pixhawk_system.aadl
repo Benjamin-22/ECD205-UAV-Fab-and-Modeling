@@ -9,48 +9,47 @@ public
 
   system implementation Pixhawk_System.impl
      extends Pixhawk_Hardware::Pixhawk.impl
+
   subcomponents
     STM32F100_Firmware : process Pixhawk_Software::STM32F100_Firmware;
     STM32F765_Firmware : process Pixhawk_Software::STM32F765_Firmware.impl;
 
-  connections
-    C10 : port STM32F100_Firmware.Serial_Packet_TX -> STM32F765_Firmware.Serial_Packet_Rx;
-    C10b : port STM32F765_Firmware.Serial_Packet_TX -> STM32F100_Firmware.Serial_Packet_Rx;
-      
-    C41 : port ICM20689.DOF6_Motion_Sensor -> STM32F765_Firmware.DOFs_Motion_Sensor;
-    C42 : port BMI055.DOF6_IMU -> STM32F765_Firmware.DOFs_IMU;
-    C43 : port MS5611.pressure_reading -> STM32F765_Firmware.pressure;
-    C44 : port NEO_M8N.gps_reading -> STM32F765_Firmware.gps_reading;
-    C45 : port NEO_M8N.compass_reading -> STM32F765_Firmware.compass_reading;
+  	connections
+  	SyC01 : port RC_Telemetry.instruction -> STM32F100_Firmware.telemetry_Packet_Rx;
+    SyC02 : port STM32F100_Firmware.Serial_Packet_TX -> STM32F765_Firmware.Serial_Packet_Rx;
+    SyC02b : port STM32F765_Firmware.Serial_Packet_TX -> STM32F100_Firmware.Serial_Packet_Rx;
     
-    C46 : port STM32F765_Firmware.Rate_1 -> M1.rate;
-    C47 : port STM32F765_Firmware.Rate_2 -> M2.rate;
-    C48 : port STM32F765_Firmware.Rate_3 -> M3.rate;
-    C49 : port STM32F765_Firmware.Rate_4 -> M4.rate;
+    SyC03 : port ICM20689.DOF6_Motion_Sensor -> STM32F765_Firmware.DOFs_Motion_Sensor;
+    SyC04 : port BMI055.DOF6_IMU -> STM32F765_Firmware.DOFs_IMU;
+    SyC05 : port MS5611.pressure_reading -> STM32F765_Firmware.pressure;
+    SyC06 : port NEO_M8N.gps_reading -> STM32F765_Firmware.gps_reading;
+    SyC07 : port NEO_M8N.compass_reading -> STM32F765_Firmware.compass_reading;
     
-    --telemetry input port?
+    SyC08 : port STM32F765_Firmware.Rate_1 -> ESC_1.rate;
+    SyC09 : port STM32F765_Firmware.Rate_2 -> ESC_2.rate;
+    SyC10 : port STM32F765_Firmware.Rate_3 -> ESC_3.rate;
+    SyC11 : port STM32F765_Firmware.Rate_4 -> ESC_4.rate;
+    
 
   flows
-    -- etef1 represents the functional chain from Motion sensor to STM32
-    -- firmware to one of the propeller.
+    -- Flow represents the functional chain from IMU to STM32F765
+    -- firmware to one of the motors.
+    IMU_to_motors : end to end flow BMI055.f1 -> SyC04 -> STM32F765_Firmware.f2
+       -> SyC08 -> ESC_1.f1 -> HC40 -> M1.f1 { latency => 0 ms .. 2 ms;};
 
-    etef1 : end to end flow ICM20689.f1 -> C41 -> STM32F765_Firmware.f3
-       -> C46 -> M1.f1 { latency => 0 ms .. 2 ms;};
-
-    -- etef2 represents the functional chain from command
-    -- (received from STM32F100) to STM32F765 firmware to one of the
-    -- propeller.
-
-    etef2 : end to end flow STM32F100_Firmware.f1 -> C10 -> STM32F765_Firmware.f1
-      -> C46 -> M1.f1 { latency => 0 ms .. 2 ms;};
+    -- Flow represents the functional chain from command (received from STM32F100) 
+    -- to STM32F765 firmware to one of the propeller.
+    Telemetry_to_motors : end to end flow RC_Telemetry.f1 -> SyC01 -> STM32F100_Firmware.f1 -> SyC02 -> STM32F765_Firmware.f1
+      -> SyC08 -> ESC_1.f1 -> HC40 -> M1.f1 { latency => 0 ms .. 6 ms;};
 
   properties
     Actual_Processor_Binding => (reference (STM32F765)) applies to STM32F765_Firmware;
     Actual_Processor_Binding => (reference (STM32F100)) applies to STM32F100_Firmware;
 
-    Actual_Connection_Binding => (reference (UART)) applies to C10;
-    Actual_Connection_Binding => (reference (I2C)) applies to C41;
-    Actual_Connection_Binding => (reference (I2C)) applies to C42;
+    Actual_Connection_Binding => (reference (UART)) applies to SyC02;
+    Actual_Connection_Binding => (reference (I2C)) applies to SyC03;
+    Actual_Connection_Binding => (reference (I2C)) applies to SyC04;
+    
     --Finish adding protocol bindings
       
   end Pixhawk_System.impl;
