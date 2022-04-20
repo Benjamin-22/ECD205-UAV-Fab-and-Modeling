@@ -1,4 +1,6 @@
 package Pixhawk_Final
+
+-- This file contains the top level Pixhawk model. Here the functional and actual models are linked.
 public
 
   with Pixhawk_System;
@@ -8,17 +10,21 @@ public
   end Pixhawk_Final;
 
   system implementation Pixhawk_Final.impl
-  subcomponents
-    Functional : system Pixhawk_Functional::Pixhawk_Functional_Chain.impl;
-    Actual : system Pixhawk_System::Pixhawk_System.impl;
+  	subcomponents
+  		
+  	  Functional : system Pixhawk_Functional::Pixhawk_Functional_Chain.impl;
+      Actual : system Pixhawk_System::Pixhawk_System.impl;
 
-  properties
-    Actual_Function_Binding => (reference (Actual.STM32F100_Firmware)) applies to Functional.Pilot;
-    Actual_Function_Binding => (reference (Actual.STM32F765_Firmware)) applies to Functional.Controller;
-    Actual_Function_Binding => (reference (Actual.STM32F765_Firmware)) applies to Functional.Fusion; 
-    Actual_Function_Binding => (reference (Actual.M1), reference (Actual.M2), reference (Actual.M3), reference (Actual.M4)) applies to Functional.Motors; 
-    Actual_Function_Binding => (reference (Actual.ICM20689)) applies to Functional.Gyro, Functional.Acc;
-    Actual_Function_Binding => (reference (Actual.NEO_M8N)) applies to Functional.Magneto;
+  	properties
+      Actual_Function_Binding => (reference (Actual.RC_Telemetry)) applies to Functional.Telemetry_rec;
+      Actual_Function_Binding => (reference (Actual.STM32F765_Firmware)) applies to Functional.Controller;
+      Actual_Function_Binding => (reference (Actual.STM32F765_Firmware)) applies to Functional.Fusion; 
+      Actual_Function_Binding => (reference (Actual.M1), reference (Actual.M2), reference (Actual.M3), reference (Actual.M4)) applies to Functional.Motors; 
+      Actual_Function_Binding => (reference (Actual.ICM20689)) applies to Functional.Gyro, Functional.Acc;
+      Actual_Function_Binding => (reference (Actual.MS5611)) applies to Functional.Pressure;
+      Actual_Function_Binding => (reference (Actual.camera)) applies to Functional.Video;
+      Actual_Function_Binding => (reference (Actual.NEO_M8N)) applies to Functional.Magneto;
+    
   end Pixhawk_Final.impl;
 
 end Pixhawk_Final;
