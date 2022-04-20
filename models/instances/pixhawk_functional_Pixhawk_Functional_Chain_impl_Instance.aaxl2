@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="ASCII"?>
+<instance:SystemInstance xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:instance="http://aadl.info/AADL/2.0/instance" name="Pixhawk_Functional_Chain_impl_Instance" category="system">
+  <componentInstance name="Acc">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="4">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="Accelero_Out" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.0"/>
+    </featureInstance>
+    <flowSpecification name="f1" destination="//@componentInstance.0/@featureInstance.0">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="100">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="300">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.0"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Accelero"/>
+  </componentInstance>
+  <componentInstance name="Gyro">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="4">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="Gyro_Out" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedDataPort.0"/>
+    </featureInstance>
+    <flowSpecification name="f1" destination="//@componentInstance.1/@featureInstance.0">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="100">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="300">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.1/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.1"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Gyro"/>
+  </componentInstance>
+  <componentInstance name="Magneto">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="4">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="Magneto_Out" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.0"/>
+    </featureInstance>
+    <flowSpecification name="f1" destination="//@componentInstance.2/@featureInstance.0">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="100">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="300">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.2"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Magneto"/>
+  </componentInstance>
+  <componentInstance name="Pressure">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="4">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="Pressure_Out" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.0"/>
+    </featureInstance>
+    <flowSpecification name="f1" destination="//@componentInstance.3/@featureInstance.0">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="100">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="300">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.3/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.3"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Pressure"/>
+  </componentInstance>
+  <componentInstance name="Video">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="17">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="Video_Out" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedDataPort.0"/>
+    </featureInstance>
+    <flowSpecification name="f1" destination="//@componentInstance.4/@featureInstance.0">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="1800">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="2200">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.4"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Video"/>
+  </componentInstance>
+  <componentInstance name="Fusion">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="4">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="Accelero_In">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedDataPort.0"/>
+    </featureInstance>
+    <featureInstance name="Gyro_In">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedDataPort.1"/>
+    </featureInstance>
+    <featureInstance name="Magneto_In">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedDataPort.2"/>
+    </featureInstance>
+    <featureInstance name="Pressure_In">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedDataPort.3"/>
+    </featureInstance>
+    <featureInstance name="Data_F_Out" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedDataPort.4"/>
+    </featureInstance>
+    <flowSpecification name="f1" source="//@componentInstance.5/@featureInstance.0" destination="//@componentInstance.5/@featureInstance.4">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="200">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="400">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <flowSpecification name="f2" source="//@componentInstance.5/@featureInstance.1" destination="//@componentInstance.5/@featureInstance.4">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="200">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="400">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedFlowSpecification.1/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedFlowSpecification.1"/>
+    </flowSpecification>
+    <flowSpecification name="f3" source="//@componentInstance.5/@featureInstance.2" destination="//@componentInstance.5/@featureInstance.4">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="200">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="400">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedFlowSpecification.2/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedFlowSpecification.2"/>
+    </flowSpecification>
+    <flowSpecification name="f4" source="//@componentInstance.5/@featureInstance.3" destination="//@componentInstance.5/@featureInstance.4">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="200">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="400">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedFlowSpecification.3/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.5/@ownedFlowSpecification.3"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.5"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Sensor_Fusion"/>
+  </componentInstance>
+  <componentInstance name="Controller">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="2">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="Data_F_In">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.0"/>
+    </featureInstance>
+    <featureInstance name="Gyro_In">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.1"/>
+    </featureInstance>
+    <featureInstance name="order">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.2"/>
+    </featureInstance>
+    <featureInstance name="Motor_Out" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.3"/>
+    </featureInstance>
+    <flowSpecification name="f1" source="//@componentInstance.6/@featureInstance.0" destination="//@componentInstance.6/@featureInstance.3">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="200">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="400">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <flowSpecification name="f2" source="//@componentInstance.6/@featureInstance.1" destination="//@componentInstance.6/@featureInstance.3">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="200">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="400">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.1/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.1"/>
+    </flowSpecification>
+    <flowSpecification name="f3" source="//@componentInstance.6/@featureInstance.2">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="200">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="400">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.2/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedFlowSpecification.2"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.6"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Controller"/>
+  </componentInstance>
+  <componentInstance name="Pilot">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.1"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="17">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="Order" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.0"/>
+    </featureInstance>
+    <flowSpecification name="f1" destination="//@componentInstance.7/@featureInstance.0">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="100">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="300">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.7/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.7"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Pilot"/>
+  </componentInstance>
+  <componentInstance name="Telemetry_rec">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.1"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="order_In">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.0"/>
+    </featureInstance>
+    <featureInstance name="order_Out" direction="out">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.1"/>
+    </featureInstance>
+    <flowSpecification name="order_rec" source="//@componentInstance.8/@featureInstance.0" destination="//@componentInstance.8/@featureInstance.1">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="100">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="300">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.8"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Telemetry_rec"/>
+  </componentInstance>
+  <componentInstance name="Motors">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:NamedValue">
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.3/@ownedLiteral.0"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="2">
+          <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <featureInstance name="Motor_In">
+      <feature xsi:type="aadl2:DataPort" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedDataPort.0"/>
+    </featureInstance>
+    <flowSpecification name="f1" source="//@componentInstance.9/@featureInstance.0">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:RangeValue">
+            <minimum xsi:type="aadl2:IntegerLiteral" value="100">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </minimum>
+            <maximum xsi:type="aadl2:IntegerLiteral" value="500">
+              <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.2"/>
+            </maximum>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedFlowSpecification.0/@ownedPropertyAssociation.0"/>
+      </ownedPropertyAssociation>
+      <flowSpecification href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedFlowSpecification.0"/>
+    </flowSpecification>
+    <subcomponent xsi:type="aadl2:AbstractSubcomponent" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedAbstractSubcomponent.9"/>
+    <index>0</index>
+    <classifier xsi:type="aadl2:AbstractType" href="../pixhawk_functional.aadl#Pixhawk_functional.Motors"/>
+  </componentInstance>
+  <endToEndFlow name="f_slow_gyro" flowElement="//@componentInstance.1/@flowSpecification.0 //@connectionInstance.1 //@componentInstance.5/@flowSpecification.1 //@connectionInstance.5 //@componentInstance.6/@flowSpecification.0 //@connectionInstance.6 //@componentInstance.9/@flowSpecification.0">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:RangeValue">
+          <minimum xsi:type="aadl2:IntegerLiteral">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+          </minimum>
+          <maximum xsi:type="aadl2:IntegerLiteral" value="9">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+          </maximum>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedEndToEndFlow.0/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <endToEndFlow href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedEndToEndFlow.0"/>
+  </endToEndFlow>
+  <endToEndFlow name="f_fast_gyro" flowElement="//@componentInstance.1/@flowSpecification.0 //@connectionInstance.2 //@componentInstance.6/@flowSpecification.1 //@connectionInstance.6 //@componentInstance.9/@flowSpecification.0">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:RangeValue">
+          <minimum xsi:type="aadl2:IntegerLiteral">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+          </minimum>
+          <maximum xsi:type="aadl2:IntegerLiteral" value="5">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+          </maximum>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedEndToEndFlow.1/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <endToEndFlow href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedEndToEndFlow.1"/>
+  </endToEndFlow>
+  <endToEndFlow name="f_command" flowElement="//@componentInstance.7/@flowSpecification.0 //@connectionInstance.7 //@componentInstance.8/@flowSpecification.0 //@connectionInstance.8 //@componentInstance.6/@flowSpecification.2">
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/Communication_Properties.aadl#Communication_Properties.Latency"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:RangeValue">
+          <minimum xsi:type="aadl2:IntegerLiteral">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+          </minimum>
+          <maximum xsi:type="aadl2:IntegerLiteral" value="4">
+            <unit href="platform:/plugin/org.osate.aadl2.contrib/resources/properties/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3"/>
+          </maximum>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedEndToEndFlow.2/@ownedPropertyAssociation.0"/>
+    </ownedPropertyAssociation>
+    <endToEndFlow href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedEndToEndFlow.2"/>
+  </endToEndFlow>
+  <connectionInstance name="Acc.Accelero_Out -> Fusion.Accelero_In" complete="true" kind="portConnection" destination="//@componentInstance.5/@featureInstance.0" source="//@componentInstance.0/@featureInstance.0">
+    <connectionReference context="/" source="//@componentInstance.0/@featureInstance.0" destination="//@componentInstance.5/@featureInstance.0">
+      <connection xsi:type="aadl2:PortConnection" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.0"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance name="Gyro.Gyro_Out -> Fusion.Gyro_In" complete="true" kind="portConnection" destination="//@componentInstance.5/@featureInstance.1" source="//@componentInstance.1/@featureInstance.0">
+    <connectionReference context="/" source="//@componentInstance.1/@featureInstance.0" destination="//@componentInstance.5/@featureInstance.1">
+      <connection xsi:type="aadl2:PortConnection" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.1"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance name="Gyro.Gyro_Out -> Controller.Gyro_In" complete="true" kind="portConnection" destination="//@componentInstance.6/@featureInstance.1" source="//@componentInstance.1/@featureInstance.0">
+    <connectionReference context="/" source="//@componentInstance.1/@featureInstance.0" destination="//@componentInstance.6/@featureInstance.1">
+      <connection xsi:type="aadl2:PortConnection" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.4"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance name="Magneto.Magneto_Out -> Fusion.Magneto_In" complete="true" kind="portConnection" destination="//@componentInstance.5/@featureInstance.2" source="//@componentInstance.2/@featureInstance.0">
+    <connectionReference context="/" source="//@componentInstance.2/@featureInstance.0" destination="//@componentInstance.5/@featureInstance.2">
+      <connection xsi:type="aadl2:PortConnection" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.2"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance name="Pressure.Pressure_Out -> Fusion.Pressure_In" complete="true" kind="portConnection" destination="//@componentInstance.5/@featureInstance.3" source="//@componentInstance.3/@featureInstance.0">
+    <connectionReference context="/" source="//@componentInstance.3/@featureInstance.0" destination="//@componentInstance.5/@featureInstance.3">
+      <connection xsi:type="aadl2:PortConnection" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.3"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance name="Fusion.Data_F_Out -> Controller.Data_F_In" complete="true" kind="portConnection" destination="//@componentInstance.6/@featureInstance.0" source="//@componentInstance.5/@featureInstance.4">
+    <connectionReference context="/" source="//@componentInstance.5/@featureInstance.4" destination="//@componentInstance.6/@featureInstance.0">
+      <connection xsi:type="aadl2:PortConnection" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.5"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance name="Controller.Motor_Out -> Motors.Motor_In" complete="true" kind="portConnection" destination="//@componentInstance.9/@featureInstance.0" source="//@componentInstance.6/@featureInstance.3">
+    <connectionReference context="/" source="//@componentInstance.6/@featureInstance.3" destination="//@componentInstance.9/@featureInstance.0">
+      <connection xsi:type="aadl2:PortConnection" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.6"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance name="Pilot.Order -> Telemetry_rec.order_In" complete="true" kind="portConnection" destination="//@componentInstance.8/@featureInstance.0" source="//@componentInstance.7/@featureInstance.0">
+    <connectionReference context="/" source="//@componentInstance.7/@featureInstance.0" destination="//@componentInstance.8/@featureInstance.0">
+      <connection xsi:type="aadl2:PortConnection" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.7"/>
+    </connectionReference>
+  </connectionInstance>
+  <connectionInstance name="Telemetry_rec.order_Out -> Controller.order" complete="true" kind="portConnection" destination="//@componentInstance.6/@featureInstance.2" source="//@componentInstance.8/@featureInstance.1">
+    <connectionReference context="/" source="//@componentInstance.8/@featureInstance.1" destination="//@componentInstance.6/@featureInstance.2">
+      <connection xsi:type="aadl2:PortConnection" href="../pixhawk_functional.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPortConnection.8"/>
+    </connectionReference>
+  </connectionInstance>
+  <systemOperationMode name="No Modes"/>
+  <componentImplementation xsi:type="aadl2:SystemImplementation" href="../pixhawk_functional.aadl#Pixhawk_functional.Pixhawk_Functional_Chain.impl"/>
+</instance:SystemInstance>

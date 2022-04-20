@@ -31,8 +31,6 @@ public
   properties
     Processor_Properties::Processor_Frequency => 216Mhz; --for - 40°C to + 85°C ambient temperature range
  
-    Scheduling_Protocol => (POSIX_1003_HIGHEST_PRIORITY_FIRST_PROTOCOL);
-    
   end STM32F765;
 
 
@@ -47,7 +45,6 @@ public
     uart_bus : requires bus access Buses::UART::UART.IMPL;
 
   properties
-    Scheduling_Protocol => (RMS);
     Processor_Properties::PRocessor_Frequency => 24Mhz;
    
   end STM32F100;
@@ -63,7 +60,7 @@ public
     i2c_bus  : requires bus access Buses::I2C::I2C.IMPL;
     spi_bus  : requires bus access Buses::SPI::SPI.impl;
   flows
-    f1 : flow source DOF6_Motion_Sensor { latency => 200 us .. 500 us; };
+    f1 : flow source DOF6_Motion_Sensor { latency => 300 us .. 500 us; };
 
   properties
     Dispatch_Protocol => Periodic;
@@ -85,11 +82,11 @@ public
     spi_bus : requires bus access Buses::SPI::SPI.impl;
     i2c_bus : requires bus access Buses::I2C::I2C.impl;
   flows
-    f1 : flow source DOF6_IMU { latency => 200 us .. 500 us; };
+    f1 : flow source DOF6_IMU { latency => 300 us .. 500 us; };
 
   properties
     Dispatch_Protocol => Periodic;
-    Period		  => 10 ms;
+    Period		  => 2 ms;
 
   end BMI055;
   
@@ -101,12 +98,11 @@ public
   
   device RC_Telemetry
   features
-    --Need to come up with a data type for telemetry input
-    command     : in data port;
+    command     : in data port Pixhawk_Types::Serial_Packet;
     instruction : out data port Pixhawk_Types::Serial_Packet;
     uart_bus    : requires bus access Buses::UART::UART.IMPL;
   flows
-    f1 : flow source instruction { latency => 100 us .. 400 us; };
+    f1 : flow source instruction { latency => 200 us .. 400 us; };
 
   properties
     Dispatch_Protocol => Periodic;
@@ -126,10 +122,10 @@ public
     	spi_bus : requires bus access Buses::SPI::SPI.impl;
     	i2c_bus : requires bus access Buses::I2C::I2C.impl;
   	flows
-  		f1 : flow source pressure_reading {latency => 100 us .. 300 us; };
+  		f1 : flow source pressure_reading {latency => 300 us .. 500 us; };
   	properties
   		Dispatch_Protocol => Periodic;
-  		Period => 4 ms; --need to find more accurate period
+  		Period => 3 ms;
   		
   		
   end MS5611;
@@ -147,10 +143,10 @@ public
   		i2c_bus : requires bus access Buses::I2C::I2C.impl;
   	flows
   		f1 : flow source gps_reading {latency => 100 us .. 300 us; };
-  		f2 : flow source compass_reading {latency => 100 us .. 300 us; }; 
+  		f2 : flow source compass_reading {latency => 200 us .. 300 us; }; 
   	properties
   		Dispatch_Protocol => Periodic;
-  		Period => 4 ms; --need to find more accurate period		
+  		Period => 3 ms;	
   end NEO_M8N;
   
   
@@ -207,9 +203,6 @@ device DJI_2312E
     pwm_bus : requires bus access PWM;
   flows
     f1 : flow sink rate { latency => 1 ns .. 2 ns; };
-
-  properties
-    Dispatch_Protocol => Sporadic;
 
   end DJI_2312E;
 

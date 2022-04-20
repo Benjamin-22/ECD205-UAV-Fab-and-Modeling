@@ -1,0 +1,117 @@
+Latency analysis with preference settings: synchronous system/major partition frame/worst case as deadline/best case as empty queue/queuing latency enabled
+
+"Latency results for end-to-end flow 'Functional.f_slow_gyro' of system 'Pixhawk_Final.impl' "
+
+Result,Min Specified,Min Actual,Min Method,Max Specified,Max Actual,Max Method,Comments
+abstract Functional.Gyro (source f1),0.0ms,0.0ms,first sampling,0.0ms,0.0ms,first sampling
+abstract Functional.Gyro (source f1),0.1ms,0.1ms,specified,0.3ms,0.3ms,specified
+connection Gyro.Gyro_Out -> Fusion.Gyro_In,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+abstract Functional.Fusion (path f2),0.0ms,0.0ms,sampling,0.0ms,3.7ms,sampling,Min: Best case: 0 ms sampling delay,Assume synchronous communication,Max: Worst case: Round up sampling delay to period 4.0ms
+abstract Functional.Fusion (path f2),0.2ms,0.2ms,specified,0.4ms,0.4ms,specified
+connection Fusion.Data_F_Out -> Controller.Data_F_In,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+abstract Functional.Controller (path f1),0.0ms,0.0ms,sampling,0.0ms,1.6ms,sampling,Min: Best case: 0 ms sampling delay,Assume synchronous communication,Max: Worst case: Round up sampling delay to period 2.0ms
+abstract Functional.Controller (path f1),0.2ms,0.2ms,specified,0.4ms,0.4ms,specified
+connection Controller.Motor_Out -> Motors.Motor_In,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+abstract Functional.Motors (sink f1),0.0ms,0.0ms,sampling,0.0ms,1.6ms,sampling,Min: Best case: 0 ms sampling delay,Assume synchronous communication,Max: Worst case: Round up sampling delay to period 2.0ms
+abstract Functional.Motors (sink f1),0.1ms,0.1ms,specified,0.5ms,0.5ms,specified
+Latency Total,0.6ms,0.6ms,,1.6ms,8.5ms
+Specified End To End Latency,,0.0ms,,,9.0ms
+End to end Latency Summary
+INFO,Minimum actual latency total 0.600ms is greater or equal to expected minimum end to end latency 0.000ms
+INFO,Maximum actual latency total 8.50ms is less or equal to expected maximum end to end latency 9.00ms
+INFO,Jitter of actual flow latency 0.600..8.50ms is within expected end to end latency jitter 0.000..9.00ms
+
+
+
+"Latency results for end-to-end flow 'Functional.f_fast_gyro' of system 'Pixhawk_Final.impl' "
+
+Result,Min Specified,Min Actual,Min Method,Max Specified,Max Actual,Max Method,Comments
+abstract Functional.Gyro (source f1),0.0ms,0.0ms,first sampling,0.0ms,0.0ms,first sampling
+abstract Functional.Gyro (source f1),0.1ms,0.1ms,specified,0.3ms,0.3ms,specified
+connection Gyro.Gyro_Out -> Controller.Gyro_In,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+abstract Functional.Controller (path f2),0.0ms,0.0ms,sampling,0.0ms,1.7ms,sampling,Min: Best case: 0 ms sampling delay,Assume synchronous communication,Max: Worst case: Round up sampling delay to period 2.0ms
+abstract Functional.Controller (path f2),0.2ms,0.2ms,specified,0.4ms,0.4ms,specified
+connection Controller.Motor_Out -> Motors.Motor_In,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+abstract Functional.Motors (sink f1),0.0ms,0.0ms,sampling,0.0ms,1.6ms,sampling,Min: Best case: 0 ms sampling delay,Assume synchronous communication,Max: Worst case: Round up sampling delay to period 2.0ms
+abstract Functional.Motors (sink f1),0.1ms,0.1ms,specified,0.5ms,0.5ms,specified
+Latency Total,0.4ms,0.4ms,,1.2ms,4.5ms
+Specified End To End Latency,,0.0ms,,,5.0ms
+End to end Latency Summary
+INFO,Minimum actual latency total 0.400ms is greater or equal to expected minimum end to end latency 0.000ms
+INFO,Maximum actual latency total 4.50ms is less or equal to expected maximum end to end latency 5.00ms
+INFO,Jitter of actual flow latency 0.400..4.50ms is within expected end to end latency jitter 0.000..5.00ms
+
+
+
+"Latency results for end-to-end flow 'Functional.f_command' of system 'Pixhawk_Final.impl' "
+
+Result,Min Specified,Min Actual,Min Method,Max Specified,Max Actual,Max Method,Comments
+abstract Functional.Pilot (source f1),0.1ms,0.1ms,specified,0.3ms,0.3ms,specified
+connection Pilot.Order -> Telemetry_rec.order_In,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+abstract Functional.Telemetry_rec (path order_rec),0.0ms,0.0ms,queued,0.0ms,0.0ms,queued,Data port as queue size 1 for sporadic, aperiodic, timed dispatch,Sporadic or periodic has period delay per queue element,Assume best case empty queue
+abstract Functional.Telemetry_rec (path order_rec),0.1ms,0.1ms,specified,0.3ms,0.3ms,specified
+connection Telemetry_rec.order_Out -> Controller.order,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+abstract Functional.Controller (sink f3),0.0ms,0.0ms,sampling,0.0ms,2.0ms,sampling,Max: Worst case: Round up sampling delay to period 2.0ms
+abstract Functional.Controller (sink f3),0.2ms,0.2ms,specified,0.4ms,0.4ms,specified
+Latency Total,0.4ms,0.4ms,,1.0ms,3.0ms
+Specified End To End Latency,,0.0ms,,,4.0ms
+End to end Latency Summary
+INFO,Minimum actual latency total 0.400ms is greater or equal to expected minimum end to end latency 0.000ms
+INFO,Maximum actual latency total 3.00ms is less or equal to expected maximum end to end latency 4.00ms
+INFO,Jitter of actual flow latency 0.400..3.00ms is within expected end to end latency jitter 0.000..4.00ms
+
+
+
+"Latency results for end-to-end flow 'Actual.IMU_to_motors' of system 'Pixhawk_Final.impl' "
+
+Result,Min Specified,Min Actual,Min Method,Max Specified,Max Actual,Max Method,Comments
+device Actual.BMI055 (source f1),0.0ms,0.0ms,first sampling,0.0ms,0.0ms,first sampling
+device Actual.BMI055 (source f1),0.3ms,0.3ms,specified,0.5ms,0.5ms,specified
+connection BMI055.DOF6_IMU -> STM32F765_Firmware.Main_Loop.DOFs_imu,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+thread Actual.STM32F765_Firmware.Main_Loop (path fs2),0.0ms,0.0ms,sampling,0.0ms,2.0ms,sampling,Min: Best case: 0 ms sampling delay,Assume synchronous communication,Max: Worst case: Round up sampling delay to period 2.5ms
+thread Actual.STM32F765_Firmware.Main_Loop (path fs2),0.0ms,0.1ms,processing time,0.0ms,0.2ms,processing time,Using execution time as deadline was not set
+connection STM32F765_Firmware.Main_Loop.Rate_1 -> ESC_1.rate,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+device Actual.ESC_1 (path f1),0.0ms,0.0ms,queued,0.0ms,0.0ms,queued,Data port as queue size 1 for sporadic, aperiodic, timed dispatch,Sporadic or periodic has period delay per queue element,Assume best case empty queue
+device Actual.ESC_1 (path f1),9.999999999999999E-6ms,9.999999999999999E-6ms,specified,1.9999999999999998E-5ms,1.9999999999999998E-5ms,specified
+connection ESC_1.adjusted_rate -> M1.rate,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+device Actual.M1 (sink f1),1.0E-6ms,1.0E-6ms,specified,2.0E-6ms,2.0E-6ms,specified
+Latency Total,0.3ms,0.4ms,,0.5ms,2.7ms
+Specified End To End Latency,,0.0ms,,,4.0ms
+End to end Latency Summary
+INFO,Minimum actual latency total 0.400ms is greater or equal to expected minimum end to end latency 0.000ms
+INFO,Maximum actual latency total 2.70ms is less or equal to expected maximum end to end latency 4.00ms
+INFO,Jitter of actual flow latency 0.400..2.70ms is within expected end to end latency jitter 0.000..4.00ms
+
+
+
+"Latency results for end-to-end flow 'Actual.Telemetry_to_motors' of system 'Pixhawk_Final.impl' "
+
+Result,Min Specified,Min Actual,Min Method,Max Specified,Max Actual,Max Method,Comments
+device Actual.RC_Telemetry (source f1),0.0ms,0.0ms,first sampling,0.0ms,0.0ms,first sampling
+device Actual.RC_Telemetry (source f1),0.2ms,0.2ms,specified,0.4ms,0.4ms,specified
+(bus Actual.UART),0.0ms,0.0ms,queued,0.0ms,0.0ms,queued
+(bus Actual.UART),0.0ms,0.0ms,sampling protocol/bus,0.0ms,0.0ms,sampling protocol/bus
+connection RC_Telemetry.instruction -> STM32F100_Firmware.telemetry_Packet_RX,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+process Actual.STM32F100_Firmware (path f1),1.0ms,1.0ms,specified,2.0ms,2.0ms,specified
+(bus Actual.UART),0.0ms,0.0ms,queued,0.0ms,0.0ms,queued
+(bus Actual.UART),0.0ms,0.0ms,sampling protocol/bus,0.0ms,0.0ms,sampling protocol/bus
+connection STM32F100_Firmware.Serial_Packet_TX -> STM32F765_Firmware.MAVLink_Rx_Task.Msg,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+thread Actual.STM32F765_Firmware.MAVLink_Rx_Task (path fs1),0.0ms,0.0ms,queued,0.0ms,1.0ms,queued,Data port as queue size 1 for sporadic, aperiodic, timed dispatch,Sporadic or periodic has period delay per queue element,Assume best case empty queue
+thread Actual.STM32F765_Firmware.MAVLink_Rx_Task (path fs1),0.0ms,0.01ms,processing time,0.0ms,0.05ms,processing time,Using execution time as deadline was not set
+connection MAVLink_Rx_Task.Serial_Packet -> Main_Loop.Serial_Packet_Rx,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+thread Actual.STM32F765_Firmware.Main_Loop (path fs1),0.0ms,0.0ms,sampling,0.0ms,1.5500000000000003ms,sampling,Min: Best case: 0 ms sampling delay,Synchronous communication on same platform,Max: Worst case: Round up sampling delay to period 2.5ms
+thread Actual.STM32F765_Firmware.Main_Loop (path fs1),0.0ms,0.1ms,processing time,0.0ms,0.2ms,processing time,Using execution time as deadline was not set
+connection STM32F765_Firmware.Main_Loop.Rate_1 -> ESC_1.rate,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+device Actual.ESC_1 (path f1),0.0ms,0.0ms,queued,0.0ms,0.0ms,queued,Data port as queue size 1 for sporadic, aperiodic, timed dispatch,Sporadic or periodic has period delay per queue element,Assume best case empty queue
+device Actual.ESC_1 (path f1),9.999999999999999E-6ms,9.999999999999999E-6ms,specified,1.9999999999999998E-5ms,1.9999999999999998E-5ms,specified
+connection ESC_1.adjusted_rate -> M1.rate,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+device Actual.M1 (sink f1),1.0E-6ms,1.0E-6ms,specified,2.0E-6ms,2.0E-6ms,specified
+Latency Total,1.2ms,1.31ms,,2.4ms,5.2ms
+Specified End To End Latency,,0.0ms,,,6.0ms
+End to end Latency Summary
+INFO,Minimum actual latency total 1.31ms is greater or equal to expected minimum end to end latency 0.000ms
+INFO,Maximum actual latency total 5.20ms is less or equal to expected maximum end to end latency 6.00ms
+INFO,Jitter of actual flow latency 1.31..5.20ms is within expected end to end latency jitter 0.000..6.00ms
+
+
+

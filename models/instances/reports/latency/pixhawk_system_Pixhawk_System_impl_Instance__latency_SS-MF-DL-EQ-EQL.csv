@@ -1,0 +1,55 @@
+Latency analysis with preference settings: synchronous system/major partition frame/worst case as deadline/best case as empty queue/queuing latency enabled
+
+"Latency results for end-to-end flow 'IMU_to_motors' of system 'Pixhawk_System.impl' "
+
+Result,Min Specified,Min Actual,Min Method,Max Specified,Max Actual,Max Method,Comments
+device BMI055 (source f1),0.0ms,0.0ms,first sampling,0.0ms,0.0ms,first sampling
+device BMI055 (source f1),0.3ms,0.3ms,specified,0.5ms,0.5ms,specified
+connection BMI055.DOF6_IMU -> STM32F765_Firmware.Main_Loop.DOFs_imu,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+thread STM32F765_Firmware.Main_Loop (path fs2),0.0ms,0.0ms,sampling,0.0ms,2.0ms,sampling,Min: Best case: 0 ms sampling delay,Assume synchronous communication,Max: Worst case: Round up sampling delay to period 2.5ms
+thread STM32F765_Firmware.Main_Loop (path fs2),0.0ms,0.1ms,processing time,0.0ms,0.2ms,processing time,Using execution time as deadline was not set
+connection STM32F765_Firmware.Main_Loop.Rate_1 -> ESC_1.rate,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+device ESC_1 (path f1),0.0ms,0.0ms,queued,0.0ms,0.0ms,queued,Data port as queue size 1 for sporadic, aperiodic, timed dispatch,Sporadic or periodic has period delay per queue element,Assume best case empty queue
+device ESC_1 (path f1),9.999999999999999E-6ms,9.999999999999999E-6ms,specified,1.9999999999999998E-5ms,1.9999999999999998E-5ms,specified
+connection ESC_1.adjusted_rate -> M1.rate,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+device M1 (sink f1),1.0E-6ms,1.0E-6ms,specified,2.0E-6ms,2.0E-6ms,specified
+Latency Total,0.3ms,0.4ms,,0.5ms,2.7ms
+Specified End To End Latency,,0.0ms,,,4.0ms
+End to end Latency Summary
+INFO,Minimum actual latency total 0.400ms is greater or equal to expected minimum end to end latency 0.000ms
+INFO,Maximum actual latency total 2.70ms is less or equal to expected maximum end to end latency 4.00ms
+INFO,Jitter of actual flow latency 0.400..2.70ms is within expected end to end latency jitter 0.000..4.00ms
+
+
+
+"Latency results for end-to-end flow 'Telemetry_to_motors' of system 'Pixhawk_System.impl' "
+
+Result,Min Specified,Min Actual,Min Method,Max Specified,Max Actual,Max Method,Comments
+device RC_Telemetry (source f1),0.0ms,0.0ms,first sampling,0.0ms,0.0ms,first sampling
+device RC_Telemetry (source f1),0.2ms,0.2ms,specified,0.4ms,0.4ms,specified
+(bus UART),0.0ms,0.0ms,queued,0.0ms,0.0ms,queued
+(bus UART),0.0ms,0.0ms,sampling protocol/bus,0.0ms,0.0ms,sampling protocol/bus
+connection RC_Telemetry.instruction -> STM32F100_Firmware.telemetry_Packet_RX,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+process STM32F100_Firmware (path f1),1.0ms,1.0ms,specified,2.0ms,2.0ms,specified
+(bus UART),0.0ms,0.0ms,queued,0.0ms,0.0ms,queued
+(bus UART),0.0ms,0.0ms,sampling protocol/bus,0.0ms,0.0ms,sampling protocol/bus
+connection STM32F100_Firmware.Serial_Packet_TX -> STM32F765_Firmware.MAVLink_Rx_Task.Msg,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+thread STM32F765_Firmware.MAVLink_Rx_Task (path fs1),0.0ms,0.0ms,queued,0.0ms,1.0ms,queued,Data port as queue size 1 for sporadic, aperiodic, timed dispatch,Sporadic or periodic has period delay per queue element,Assume best case empty queue
+thread STM32F765_Firmware.MAVLink_Rx_Task (path fs1),0.0ms,0.01ms,processing time,0.0ms,0.05ms,processing time,Using execution time as deadline was not set
+connection MAVLink_Rx_Task.Serial_Packet -> Main_Loop.Serial_Packet_Rx,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+thread STM32F765_Firmware.Main_Loop (path fs1),0.0ms,0.0ms,sampling,0.0ms,1.5500000000000003ms,sampling,Min: Best case: 0 ms sampling delay,Synchronous communication on same platform,Max: Worst case: Round up sampling delay to period 2.5ms
+thread STM32F765_Firmware.Main_Loop (path fs1),0.0ms,0.1ms,processing time,0.0ms,0.2ms,processing time,Using execution time as deadline was not set
+connection STM32F765_Firmware.Main_Loop.Rate_1 -> ESC_1.rate,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+device ESC_1 (path f1),0.0ms,0.0ms,queued,0.0ms,0.0ms,queued,Data port as queue size 1 for sporadic, aperiodic, timed dispatch,Sporadic or periodic has period delay per queue element,Assume best case empty queue
+device ESC_1 (path f1),9.999999999999999E-6ms,9.999999999999999E-6ms,specified,1.9999999999999998E-5ms,1.9999999999999998E-5ms,specified
+connection ESC_1.adjusted_rate -> M1.rate,0.0ms,0.0ms,no sampling/queuing latency,0.0ms,0.0ms,no sampling/queuing latency
+device M1 (sink f1),1.0E-6ms,1.0E-6ms,specified,2.0E-6ms,2.0E-6ms,specified
+Latency Total,1.2ms,1.31ms,,2.4ms,5.2ms
+Specified End To End Latency,,0.0ms,,,6.0ms
+End to end Latency Summary
+INFO,Minimum actual latency total 1.31ms is greater or equal to expected minimum end to end latency 0.000ms
+INFO,Maximum actual latency total 5.20ms is less or equal to expected maximum end to end latency 6.00ms
+INFO,Jitter of actual flow latency 1.31..5.20ms is within expected end to end latency jitter 0.000..6.00ms
+
+
+

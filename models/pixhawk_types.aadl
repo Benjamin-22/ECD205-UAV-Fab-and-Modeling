@@ -37,8 +37,7 @@ public
   --------------------
 
   -- Syslink is the protocol used between the STM32 and NRF51 in
-  -- Pixhawk 2.0. It handles low level communication on the serial
-  -- port. See https://wiki.bitcraze.io/doc:Pixhawk:syslink:index
+  -- Pixhawk 2.0. It handles low level communication on the serial port.
 
   data Serial_Packet
     --  For now, we model it as an opaque type
