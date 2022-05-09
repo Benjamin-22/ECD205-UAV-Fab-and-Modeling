@@ -272,6 +272,7 @@ end CAN;
     HC15 : bus access NEO_M8N.i2c_bus   -> i2c;
     
     HC16 : bus access NEO_M8N.can_bus   -> CAN;
+    HC17 : bus access STM32F765.can_bus -> CAN;
     
     HC21 : bus access STM32F765.spi_bus -> SPI;
     HC22 : bus access ICM20689.spi_bus  -> SPI;

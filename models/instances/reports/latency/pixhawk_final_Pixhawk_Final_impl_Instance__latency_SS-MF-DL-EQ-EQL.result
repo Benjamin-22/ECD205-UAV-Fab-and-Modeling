@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="ASCII"?>
+<result:AnalysisResult xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:result="http://www.osate.org/result/Result" analysis="latency" message="SS-MF-DL-EQ-EQL">
+  <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#/"/>
+  <parameters value="ACED0005737200116A6176612E6C616E672E426F6F6C65616ECD207280D59CFAEE0200015A000576616C7565787000"/>
+  <parameters value="ACED0005737200116A6176612E6C616E672E426F6F6C65616ECD207280D59CFAEE0200015A000576616C7565787001"/>
+  <parameters value="ACED0005737200116A6176612E6C616E672E426F6F6C65616ECD207280D59CFAEE0200015A000576616C7565787001"/>
+  <parameters value="ACED0005737200116A6176612E6C616E672E426F6F6C65616ECD207280D59CFAEE0200015A000576616C7565787001"/>
+  <parameters value="ACED0005737200116A6176612E6C616E672E426F6F6C65616ECD207280D59CFAEE0200015A000576616C7565787000"/>
+  <results message="Latency results for f_slow_gyro" resultType="SUCCESS">
+    <values xsi:type="result:StringValue" value=""/>
+    <values xsi:type="result:RealValue" value="0.6"/>
+    <values xsi:type="result:RealValue" value="8.5"/>
+    <values xsi:type="result:RealValue" value="0.6"/>
+    <values xsi:type="result:RealValue" value="1.6"/>
+    <values xsi:type="result:RealValue"/>
+    <values xsi:type="result:RealValue" value="9.0"/>
+    <diagnostics diagnosticType="INFO" message="Minimum actual latency total 0.600ms is greater or equal to expected minimum end to end latency 0.000ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.0"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Maximum actual latency total 8.50ms is less or equal to expected maximum end to end latency 9.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.0"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Jitter of actual flow latency 0.600..8.50ms is within expected end to end latency jitter 0.000..9.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.0"/>
+    </diagnostics>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="first sampling"/>
+      <values xsi:type="result:StringValue" value="first sampling"/>
+      <values xsi:type="result:StringValue" value="source f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.1"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="source f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.1"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@connectionInstance.1"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue" value="3.7"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="path f2"/>
+      <diagnostics diagnosticType="INFO" message="Min: Best case: 0 ms sampling delay">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.5"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume synchronous communication">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.5"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Max: Worst case: Round up sampling delay to period 4.0ms">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.5"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.5"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="path f2"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.5"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@connectionInstance.5"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue" value="1.6"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="path f1"/>
+      <diagnostics diagnosticType="INFO" message="Min: Best case: 0 ms sampling delay">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume synchronous communication">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Max: Worst case: Round up sampling delay to period 2.0ms">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="path f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@connectionInstance.6"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue" value="1.6"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sink f1"/>
+      <diagnostics diagnosticType="INFO" message="Min: Best case: 0 ms sampling delay">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume synchronous communication">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Max: Worst case: Round up sampling delay to period 2.0ms">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.5"/>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.5"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="sink f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+    </subResults>
+    <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.0"/>
+  </results>
+  <results message="Latency results for f_fast_gyro" resultType="SUCCESS">
+    <values xsi:type="result:StringValue" value=""/>
+    <values xsi:type="result:RealValue" value="0.4"/>
+    <values xsi:type="result:RealValue" value="4.5"/>
+    <values xsi:type="result:RealValue" value="0.4"/>
+    <values xsi:type="result:RealValue" value="1.2"/>
+    <values xsi:type="result:RealValue"/>
+    <values xsi:type="result:RealValue" value="5.0"/>
+    <diagnostics diagnosticType="INFO" message="Minimum actual latency total 0.400ms is greater or equal to expected minimum end to end latency 0.000ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.1"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Maximum actual latency total 4.50ms is less or equal to expected maximum end to end latency 5.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.1"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Jitter of actual flow latency 0.400..4.50ms is within expected end to end latency jitter 0.000..5.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.1"/>
+    </diagnostics>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="first sampling"/>
+      <values xsi:type="result:StringValue" value="first sampling"/>
+      <values xsi:type="result:StringValue" value="source f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.1"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="source f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.1"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@connectionInstance.2"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue" value="1.7"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="path f2"/>
+      <diagnostics diagnosticType="INFO" message="Min: Best case: 0 ms sampling delay">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume synchronous communication">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Max: Worst case: Round up sampling delay to period 2.0ms">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="path f2"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@connectionInstance.6"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue" value="1.6"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sink f1"/>
+      <diagnostics diagnosticType="INFO" message="Min: Best case: 0 ms sampling delay">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume synchronous communication">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Max: Worst case: Round up sampling delay to period 2.0ms">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.5"/>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.5"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="sink f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.9"/>
+    </subResults>
+    <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.1"/>
+  </results>
+  <results message="Latency results for f_command" resultType="SUCCESS">
+    <values xsi:type="result:StringValue" value=""/>
+    <values xsi:type="result:RealValue" value="0.4"/>
+    <values xsi:type="result:RealValue" value="3.0"/>
+    <values xsi:type="result:RealValue" value="0.4"/>
+    <values xsi:type="result:RealValue" value="1.0"/>
+    <values xsi:type="result:RealValue"/>
+    <values xsi:type="result:RealValue" value="4.0"/>
+    <diagnostics diagnosticType="INFO" message="Minimum actual latency total 0.400ms is greater or equal to expected minimum end to end latency 0.000ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.2"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Maximum actual latency total 3.00ms is less or equal to expected maximum end to end latency 4.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.2"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Jitter of actual flow latency 0.400..3.00ms is within expected end to end latency jitter 0.000..4.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.2"/>
+    </diagnostics>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="source f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.7"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@connectionInstance.7"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="queued"/>
+      <values xsi:type="result:StringValue" value="queued"/>
+      <values xsi:type="result:StringValue" value="path order_rec"/>
+      <diagnostics diagnosticType="INFO" message="Data port as queue size 1 for sporadic, aperiodic, timed dispatch">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.8"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Sporadic or periodic has period delay per queue element">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.8"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume best case empty queue">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.8"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.8"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="path order_rec"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.8"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@connectionInstance.8"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue" value="2.0"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sink f3"/>
+      <diagnostics diagnosticType="INFO" message="Max: Worst case: Round up sampling delay to period 2.0ms">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="sink f3"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@componentInstance.6"/>
+    </subResults>
+    <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.0/@endToEndFlow.2"/>
+  </results>
+  <results message="Latency results for IMU_to_motors" resultType="SUCCESS">
+    <values xsi:type="result:StringValue" value=""/>
+    <values xsi:type="result:RealValue" value="0.4"/>
+    <values xsi:type="result:RealValue" value="2.7"/>
+    <values xsi:type="result:RealValue" value="0.3"/>
+    <values xsi:type="result:RealValue" value="0.5"/>
+    <values xsi:type="result:RealValue"/>
+    <values xsi:type="result:RealValue" value="4.0"/>
+    <diagnostics diagnosticType="INFO" message="Minimum actual latency total 0.400ms is greater or equal to expected minimum end to end latency 0.000ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@endToEndFlow.0"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Maximum actual latency total 2.70ms is less or equal to expected maximum end to end latency 4.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@endToEndFlow.0"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Jitter of actual flow latency 0.400..2.70ms is within expected end to end latency jitter 0.000..4.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@endToEndFlow.0"/>
+    </diagnostics>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="first sampling"/>
+      <values xsi:type="result:StringValue" value="first sampling"/>
+      <values xsi:type="result:StringValue" value="source f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.7"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:RealValue" value="0.5"/>
+      <values xsi:type="result:RealValue" value="0.3"/>
+      <values xsi:type="result:RealValue" value="0.5"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="source f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.7"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@connectionInstance.3"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue" value="2.0"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="path fs2"/>
+      <diagnostics diagnosticType="INFO" message="Min: Best case: 0 ms sampling delay">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume synchronous communication">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Max: Worst case: Round up sampling delay to period 2.5ms">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="processing time"/>
+      <values xsi:type="result:StringValue" value="processing time"/>
+      <values xsi:type="result:StringValue" value="path fs2"/>
+      <diagnostics diagnosticType="INFO" message="Using execution time as deadline was not set">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@connectionInstance.38"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="queued"/>
+      <values xsi:type="result:StringValue" value="queued"/>
+      <values xsi:type="result:StringValue" value="path f1"/>
+      <diagnostics diagnosticType="INFO" message="Data port as queue size 1 for sporadic, aperiodic, timed dispatch">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Sporadic or periodic has period delay per queue element">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume best case empty queue">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="9.999999999999999E-6"/>
+      <values xsi:type="result:RealValue" value="1.9999999999999998E-5"/>
+      <values xsi:type="result:RealValue" value="9.999999999999999E-6"/>
+      <values xsi:type="result:RealValue" value="1.9999999999999998E-5"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="path f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@connectionInstance.19"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="1.0E-6"/>
+      <values xsi:type="result:RealValue" value="2.0E-6"/>
+      <values xsi:type="result:RealValue" value="1.0E-6"/>
+      <values xsi:type="result:RealValue" value="2.0E-6"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="sink f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.17"/>
+    </subResults>
+    <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@endToEndFlow.0"/>
+  </results>
+  <results message="Latency results for Telemetry_to_motors" resultType="SUCCESS">
+    <values xsi:type="result:StringValue" value=""/>
+    <values xsi:type="result:RealValue" value="1.31"/>
+    <values xsi:type="result:RealValue" value="5.2"/>
+    <values xsi:type="result:RealValue" value="1.2"/>
+    <values xsi:type="result:RealValue" value="2.4"/>
+    <values xsi:type="result:RealValue"/>
+    <values xsi:type="result:RealValue" value="6.0"/>
+    <diagnostics diagnosticType="INFO" message="Minimum actual latency total 1.31ms is greater or equal to expected minimum end to end latency 0.000ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@endToEndFlow.1"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Maximum actual latency total 5.20ms is less or equal to expected maximum end to end latency 6.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@endToEndFlow.1"/>
+    </diagnostics>
+    <diagnostics diagnosticType="INFO" message="Jitter of actual flow latency 1.31..5.20ms is within expected end to end latency jitter 0.000..6.00ms">
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@endToEndFlow.1"/>
+    </diagnostics>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="first sampling"/>
+      <values xsi:type="result:StringValue" value="first sampling"/>
+      <values xsi:type="result:StringValue" value="source f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.12"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue" value="0.4"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="source f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.12"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <subResults>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:StringValue" value="queued"/>
+        <values xsi:type="result:StringValue" value="queued"/>
+        <values xsi:type="result:StringValue" value=""/>
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.0"/>
+      </subResults>
+      <subResults>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:StringValue" value="sampling protocol/bus"/>
+        <values xsi:type="result:StringValue" value="sampling protocol/bus"/>
+        <values xsi:type="result:StringValue" value=""/>
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.0"/>
+      </subResults>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@connectionInstance.17"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="1.0"/>
+      <values xsi:type="result:RealValue" value="2.0"/>
+      <values xsi:type="result:RealValue" value="1.0"/>
+      <values xsi:type="result:RealValue" value="2.0"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="path f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.23"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <subResults>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:StringValue" value="queued"/>
+        <values xsi:type="result:StringValue" value="queued"/>
+        <values xsi:type="result:StringValue" value=""/>
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.0"/>
+      </subResults>
+      <subResults>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:RealValue"/>
+        <values xsi:type="result:StringValue" value="sampling protocol/bus"/>
+        <values xsi:type="result:StringValue" value="sampling protocol/bus"/>
+        <values xsi:type="result:StringValue" value=""/>
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.0"/>
+      </subResults>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@connectionInstance.36"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue" value="1.0"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="queued"/>
+      <values xsi:type="result:StringValue" value="queued"/>
+      <values xsi:type="result:StringValue" value="path fs1"/>
+      <diagnostics diagnosticType="INFO" message="Data port as queue size 1 for sporadic, aperiodic, timed dispatch">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.1"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Sporadic or periodic has period delay per queue element">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.1"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume best case empty queue">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.1"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.1"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.01"/>
+      <values xsi:type="result:RealValue" value="0.05"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="processing time"/>
+      <values xsi:type="result:StringValue" value="processing time"/>
+      <values xsi:type="result:StringValue" value="path fs1"/>
+      <diagnostics diagnosticType="INFO" message="Using execution time as deadline was not set">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.1"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.1"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@connectionInstance.0"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue" value="1.5500000000000003"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="sampling"/>
+      <values xsi:type="result:StringValue" value="path fs1"/>
+      <diagnostics diagnosticType="INFO" message="Min: Best case: 0 ms sampling delay">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Synchronous communication on same platform">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Max: Worst case: Round up sampling delay to period 2.5ms">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="0.1"/>
+      <values xsi:type="result:RealValue" value="0.2"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="processing time"/>
+      <values xsi:type="result:StringValue" value="processing time"/>
+      <values xsi:type="result:StringValue" value="path fs1"/>
+      <diagnostics diagnosticType="INFO" message="Using execution time as deadline was not set">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.24/@componentInstance.3"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@connectionInstance.38"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="queued"/>
+      <values xsi:type="result:StringValue" value="queued"/>
+      <values xsi:type="result:StringValue" value="path f1"/>
+      <diagnostics diagnosticType="INFO" message="Data port as queue size 1 for sporadic, aperiodic, timed dispatch">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Sporadic or periodic has period delay per queue element">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+      </diagnostics>
+      <diagnostics diagnosticType="INFO" message="Assume best case empty queue">
+        <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+      </diagnostics>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="9.999999999999999E-6"/>
+      <values xsi:type="result:RealValue" value="1.9999999999999998E-5"/>
+      <values xsi:type="result:RealValue" value="9.999999999999999E-6"/>
+      <values xsi:type="result:RealValue" value="1.9999999999999998E-5"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="path f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.13"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:RealValue"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value="no sampling/queuing latency"/>
+      <values xsi:type="result:StringValue" value=""/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@connectionInstance.19"/>
+    </subResults>
+    <subResults>
+      <values xsi:type="result:RealValue" value="1.0E-6"/>
+      <values xsi:type="result:RealValue" value="2.0E-6"/>
+      <values xsi:type="result:RealValue" value="1.0E-6"/>
+      <values xsi:type="result:RealValue" value="2.0E-6"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="specified"/>
+      <values xsi:type="result:StringValue" value="sink f1"/>
+      <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@componentInstance.17"/>
+    </subResults>
+    <modelElement href="../../pixhawk_final_Pixhawk_Final_impl_Instance.aaxl2#//@componentInstance.1/@endToEndFlow.1"/>
+  </results>
+</result:AnalysisResult>
